@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Spectral:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+<title>Ministère du Chômage — République Française</title>
+<style>
+  :root{
+    --blue-france: #000091;
+    --blue-france-sun: #1212ff;
+    --red-marianne: #e1000f;
+    --grey-text: #161616;
+    --grey-text-alt: #3a3a3a;
+    --grey-line: #dddddd;
+    --grey-bg: #f6f6f6;
+    --grey-bg-alt: #eeeeee;
+    --white: #ffffff;
+    --sans: "Work Sans", Arial, "Helvetica Neue", sans-serif;
+    --serif: "Spectral", Georgia, serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-padding-top: env(safe-area-inset-top,0px); }
+  body{
+    margin:0;
+    font-family: var(--sans);
+    color: var(--grey-text);
+    background: var(--white);
+    padding-top: env(safe-area-inset-top,0px);
+    padding-bottom: env(safe-area-inset-bottom,0px);
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{ max-width:100%; }
+  a{ color: var(--blue-france); }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--blue-france);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Bandeau tricolore ---------- */
+  .tricolor{
+    height: 4px;
+    display:flex;
+  }
+  .tricolor span{ flex:1; }
+  .tricolor .bleu{ background: var(--blue-france); }
+  .tricolor .blanc{ background: var(--white); }
+  .tricolor .rouge{ background: var(--red-marianne); }
+
+  /* ---------- Header ---------- */
+  header.fr-header{
+    border-bottom: 1px solid var(--grey-line);
+  }
+  .fr-header__body{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem 1rem;
+    display:flex;
+    gap:1.25rem;
+    align-items:flex-start;
+  }
+  .marianne-block{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .marianne-block svg{ width:64px; height:60px; display:block; margin-bottom:.35rem; }
+  .marianne-block .rf-1{ font-family: var(--serif); font-weight:600; font-size:.82rem; letter-spacing:.01em; }
+  .marianne-block .rf-2{ font-family: var(--serif); font-weight:600; font-size:.82rem; letter-spacing:.01em; }
+
+  .fr-header__service{
+    padding-top:.35rem;
+    border-left: 1px solid var(--grey-line);
+    padding-left: 1.25rem;
+  }
+  .fr-header__service-title{
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin:0 0 .2rem;
+    color: var(--grey-text);
+  }
+  .fr-header__service-tagline{
+    font-size:.95rem;
+    color: var(--grey-text-alt);
+    margin:0;
+  }
+
+  nav.fr-nav{
+    background: var(--grey-bg);
+    border-top: 1px solid var(--grey-line);
+    border-bottom: 1px solid var(--grey-line);
+  }
+  nav.fr-nav ul{
+    max-width:1200px;
+    margin:0 auto;
+    padding: 0 1.5rem;
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    gap: .25rem;
+  }
+  nav.fr-nav a{
+    display:block;
+    padding: .85rem 1rem;
+    text-decoration:none;
+    color: var(--grey-text);
+    font-weight:500;
+    font-size:.95rem;
+    border-bottom: 3px solid transparent;
+  }
+  nav.fr-nav li:first-child a{
+    border-bottom-color: var(--blue-france);
+    color: var(--blue-france);
+  }
+  nav.fr-nav a:hover{
+    background: var(--grey-bg-alt);
+  }
+
+  /* ---------- Hero ---------- */
+  .fr-hero{
+    background: var(--grey-bg);
+  }
+  .fr-hero__inner{
+    max-width:1200px;
+    margin:0 auto;
+    padding: 3rem 1.5rem 3.5rem;
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap:2.5rem;
+    align-items:center;
+  }
+  .fr-hero h1{
+    font-family: var(--serif);
+    font-weight:600;
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    line-height:1.15;
+    margin: 0 0 1rem;
+    max-width: 20ch;
+  }
+  .fr-hero .lede{
+    font-size: 1.05rem;
+    line-height:1.6;
+    color: var(--grey-text-alt);
+    max-width: 62ch;
+    margin:0;
+  }
+  .fr-hero__badge{
+    justify-self:end;
+    text-align:center;
+  }
+  .fr-hero__badge svg{ width:120px; height:120px; }
+  .fr-hero__badge span{
+    display:block;
+    margin-top:.5rem;
+    font-size:.72rem;
+    letter-spacing:.04em;
+    color: var(--grey-text-alt);
+    max-width:130px;
+  }
+
+  .fr-breadcrumb{
+    max-width:1200px;
+    margin: 0 auto;
+    padding: .9rem 1.5rem;
+    font-size:.85rem;
+    color: var(--grey-text-alt);
+  }
+  .fr-breadcrumb a{ text-decoration:none; }
+  .fr-breadcrumb a:hover{ text-decoration:underline; }
+
+  /* ---------- Contenu / actus ---------- */
+  main{
+    max-width:1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3.5rem;
+  }
+  .section-title{
+    font-family: var(--serif);
+    font-weight:600;
+    font-size: 1.55rem;
+    margin: 0 0 1.4rem;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid var(--grey-line);
+  }
+  .actus-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .actu-card{
+    border: 1px solid var(--grey-line);
+    background: var(--white);
+  }
+  .actu-card__tag{
+    display:inline-block;
+    background: var(--blue-france);
+    color: var(--white);
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.03em;
+    padding: .3rem .6rem;
+    margin: 1.1rem 0 0 1.1rem;
+  }
+  .actu-card p.body{
+    font-size:.95rem;
+    line-height:1.55;
+    padding: .9rem 1.1rem 1.3rem;
+    margin:0;
+  }
+  .actu-card a{
+    display:block;
+    text-decoration:none;
+    color: inherit;
+  }
+  .actu-card a:hover p.body{
+    text-decoration:underline;
+    text-decoration-color: var(--blue-france);
+  }
+
+  /* ---------- Bloc "démarche" ---------- */
+  .fr-callout{
+    margin-top: 2.75rem;
+    border-left: 4px solid var(--blue-france);
+    background: var(--grey-bg);
+    padding: 1.6rem 1.8rem;
+  }
+  .fr-callout h2{
+    font-family: var(--serif);
+    font-size:1.2rem;
+    margin: 0 0 .6rem;
+  }
+  .fr-callout p{
+    margin:0 0 1.1rem;
+    line-height:1.6;
+    color: var(--grey-text-alt);
+    max-width: 65ch;
+  }
+  .fr-btn{
+    display:inline-block;
+    background: var(--blue-france);
+    color: var(--white);
+    text-decoration:none;
+    font-weight:600;
+    font-size:.95rem;
+    padding: .75rem 1.4rem;
+  }
+  .fr-btn:hover{ background: var(--blue-france-sun); }
+
+  /* ---------- Footer ---------- */
+  footer.fr-footer{
+    border-top: 3px solid var(--blue-france);
+    background: var(--grey-bg);
+  }
+  .fr-footer__inner{
+    max-width:1200px;
+    margin:0 auto;
+    padding: 2.5rem 1.5rem 2rem;
+    display:grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+  }
+  .fr-footer__brand{
+    display:flex;
+    flex-direction:column;
+    gap:.9rem;
+  }
+  .fr-footer__brand svg{ width:52px; height:48px; }
+  .fr-footer__brand p{
+    font-family: var(--serif);
+    font-weight:600;
+    font-size:.9rem;
+    line-height:1.3;
+    margin:0;
+    max-width:16ch;
+  }
+  .fr-footer__cols{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .fr-footer__cols h3{
+    font-size:.82rem;
+    letter-spacing:.01em;
+    margin:0 0 .8rem;
+    color: var(--grey-text);
+  }
+  .fr-footer__cols ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:.55rem;
+  }
+  .fr-footer__cols a{
+    font-size:.88rem;
+    text-decoration:none;
+    color: var(--grey-text-alt);
+  }
+  .fr-footer__cols a:hover{ text-decoration:underline; color: var(--blue-france); }
+  .fr-footer__bottom{
+    border-top: 1px solid var(--grey-line);
+    padding: 1.1rem 1.5rem;
+    max-width:1200px;
+    margin:0 auto;
+    font-size:.78rem;
+    color: var(--grey-text-alt);
+  }
+
+  @media (max-width: 860px){
+    .fr-hero__inner{ grid-template-columns: 1fr; }
+    .fr-hero__badge{ justify-self:start; }
+    .actus-grid{ grid-template-columns: 1fr; }
+    .fr-footer__inner{ grid-template-columns: 1fr; }
+    .fr-footer__cols{ grid-template-columns: 1fr 1fr; }
+    .fr-header__body{ flex-direction:column; }
+    .fr-header__service{ border-left:none; padding-left:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="tricolor" aria-hidden="true"><span class="bleu"></span><span class="blanc"></span><span class="rouge"></span></div>
+
+<header class="fr-header" role="banner">
+  <div class="fr-header__body">
+    <div class="marianne-block" aria-hidden="true">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="26" height="80" fill="#000091"/>
+        <rect x="27" y="0" width="26" height="80" fill="#ffffff" stroke="#dddddd" stroke-width="1"/>
+        <rect x="54" y="0" width="26" height="80" fill="#e1000f"/>
+        <path d="M40 14c-9 0-15 8-15 17 0 12 8 20 15 27 7-7 15-15 15-27 0-9-6-17-15-17z" fill="#161616" opacity="0.85"/>
+      </svg>
+      <span class="rf-1">RÉPUBLIQUE</span>
+      <span class="rf-2">FRANÇAISE</span>
+    </div>
+    <div class="fr-header__service">
+      <p class="fr-header__service-title">Ministère du Chômage</p>
+      <p class="fr-header__service-tagline">Liberté &nbsp;·&nbsp; Égalité &nbsp;·&nbsp; Fraternité</p>
+    </div>
+  </div>
+  <nav class="fr-nav" aria-label="Menu principal">
+    <ul>
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#">Démarches administratives</a></li>
+      <li><a href="#">Formulaires en trois exemplaires</a></li>
+      <li><a href="#actus">Actualités</a></li>
+      <li><a href="#">Nous ne pas contacter</a></li>
+    </ul>
+  </nav>
+</header>
+
+<p class="fr-breadcrumb"><a href="#">gouv.fr</a> › <a href="#">Ministères</a> › Ministère du Chômage</p>
+
+<section class="fr-hero" id="accueil">
+  <div class="fr-hero__inner">
+    <div>
+      <h1>Bienvenue au Ministère du Chômage</h1>
+      <p class="lede">Notre mission : vous accompagner à ne surtout rien faire, avec le même sérieux administratif que n'importe quel autre ministère. Formulaires en trois exemplaires, jargon incompréhensible et délais de traitement infinis inclus.</p>
+    </div>
+    <div class="fr-hero__badge">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="38" fill="none" stroke="#000091" stroke-width="2"/>
+        <circle cx="40" cy="40" r="30" fill="none" stroke="#e1000f" stroke-width="1"/>
+        <text x="40" y="36" text-anchor="middle" font-family="Spectral, serif" font-size="9" fill="#161616" font-weight="600">SERVICE</text>
+        <text x="40" y="48" text-anchor="middle" font-family="Spectral, serif" font-size="9" fill="#161616" font-weight="600">PUBLIC</text>
+        <text x="40" y="58" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="6" fill="#3a3a3a">de l'inaction</text>
+      </svg>
+      <span>Certifié conforme à la lenteur républicaine</span>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section id="actus" aria-labelledby="actus-title">
+    <h2 class="section-title" id="actus-title">Actualités</h2>
+    <ul class="actus-grid">
+      <li class="actu-card">
+        <a href="#">
+          <span class="actu-card__tag">Communiqué</span>
+          <p class="body">Le Ministère du Chômage lance une nouvelle initiative pour encourager l'inaction.</p>
+        </a>
+      </li>
+      <li class="actu-card">
+        <a href="#">
+          <span class="actu-card__tag">Démarche</span>
+          <p class="body">Découvrez nos nouvelles procédures administratives pour maximiser votre temps libre.</p>
+        </a>
+      </li>
+      <li class="actu-card">
+        <a href="#">
+          <span class="actu-card__tag">Évènement</span>
+          <p class="body">Participez à notre concours annuel de procrastination et gagnez des prix incroyables !</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <div class="fr-callout">
+    <h2>Une question ? Une démarche à ne pas faire ?</h2>
+    <p>Nos guichets sont ouverts de jamais à jamais. Un agent ne vous recontactera sous aucun délai déterminé.</p>
+    <a class="fr-btn" href="#">Ne rien entreprendre</a>
+  </div>
+</main>
+
+<footer class="fr-footer" role="contentinfo">
+  <div class="fr-footer__inner">
+    <div class="fr-footer__brand">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0" y="0" width="26" height="80" fill="#000091"/>
+        <rect x="27" y="0" width="26" height="80" fill="#ffffff" stroke="#dddddd" stroke-width="1"/>
+        <rect x="54" y="0" width="26" height="80" fill="#e1000f"/>
+      </svg>
+      <p>Ministère du Chômage République Française</p>
+    </div>
+    <div class="fr-footer__cols">
+      <div>
+        <h3>Le ministère</h3>
+        <ul>
+          <li><a href="#">Organigramme fantôme</a></li>
+          <li><a href="#">Rapports jamais publiés</a></li>
+          <li><a href="#">Nous recruter à ne rien faire</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Ressources</h3>
+        <ul>
+          <li><a href="#">Formulaire Cerfa n°00000</a></li>
+          <li><a href="#">Foire aux excuses</a></li>
+          <li><a href="#">Statistiques introuvables</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Informations légales</h3>
+        <ul>
+          <li><a href="#">Mentions inutiles</a></li>
+          <li><a href="#">Accessibilité : non conforme</a></li>
+          <li><a href="#">Plan du site (vide)</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="fr-footer__bottom">© République Française — Ministère du Chômage. Site parodique, aucune démarche réelle n'est possible ici.</p>
+</footer>
+
+</body>
+</html>

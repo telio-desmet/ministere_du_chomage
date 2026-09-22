@@ -1,0 +1,319 @@
+:root{
+    --blue-france: #000091;
+    --blue-france-sun: #1212ff;
+    --red-marianne: #e1000f;
+    --grey-text: #161616;
+    --grey-text-alt: #3a3a3a;
+    --grey-line: #dddddd;
+    --grey-bg: #f6f6f6;
+    --grey-bg-alt: #eeeeee;
+    --white: #ffffff;
+    --sans: "Work Sans", Arial, "Helvetica Neue", sans-serif;
+    --serif: "Spectral", Georgia, serif;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-padding-top: env(safe-area-inset-top,0px); }
+  body{
+    margin:0;
+    font-family: var(--sans);
+    color: var(--grey-text);
+    background: var(--white);
+    padding-top: env(safe-area-inset-top,0px);
+    padding-bottom: env(safe-area-inset-bottom,0px);
+    -webkit-font-smoothing:antialiased;
+  }
+  img,svg{ max-width:100%; }
+  a{ color: var(--blue-france); }
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--blue-france);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Bandeau tricolore ---------- */
+  .tricolor{
+    height: 4px;
+    display:flex;
+  }
+  .tricolor span{ flex:1; }
+  .tricolor .bleu{ background: var(--blue-france); }
+  .tricolor .blanc{ background: var(--white); }
+  .tricolor .rouge{ background: var(--red-marianne); }
+
+  /* ---------- Header ---------- */
+  header.fr-header{
+    border-bottom: 1px solid var(--grey-line);
+  }
+  .fr-header__body{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.25rem 1.5rem 1rem;
+    display:flex;
+    gap:1.25rem;
+    align-items:flex-start;
+  }
+  .marianne-block{
+    display:flex;
+    flex-direction:column;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .marianne-block svg{ width:64px; height:60px; display:block; margin-bottom:.35rem; }
+  .marianne-block .rf-1{ font-family: var(--serif); font-weight:600; font-size:.82rem; letter-spacing:.01em; }
+  .marianne-block .rf-2{ font-family: var(--serif); font-weight:600; font-size:.82rem; letter-spacing:.01em; }
+
+  .fr-header__service{
+    padding-top:.35rem;
+    border-left: 1px solid var(--grey-line);
+    padding-left: 1.25rem;
+  }
+  .fr-header__service-title{
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin:0 0 .2rem;
+    color: var(--grey-text);
+  }
+  .fr-header__service-tagline{
+    font-size:.95rem;
+    color: var(--grey-text-alt);
+    margin:0;
+  }
+
+  nav.fr-nav{
+    background: var(--grey-bg);
+    border-top: 1px solid var(--grey-line);
+    border-bottom: 1px solid var(--grey-line);
+  }
+  nav.fr-nav ul{
+    max-width:1200px;
+    margin:0 auto;
+    padding: 0 1.5rem;
+    list-style:none;
+    display:flex;
+    flex-wrap:wrap;
+    gap: .25rem;
+  }
+  nav.fr-nav a{
+    display:block;
+    padding: .85rem 1rem;
+    text-decoration:none;
+    color: var(--grey-text);
+    font-weight:500;
+    font-size:.95rem;
+    border-bottom: 3px solid transparent;
+  }
+  nav.fr-nav li:first-child a{
+    border-bottom-color: var(--blue-france);
+    color: var(--blue-france);
+  }
+  nav.fr-nav a:hover{
+    background: var(--grey-bg-alt);
+  }
+
+  /* ---------- Hero ---------- */
+  .fr-hero{
+    background: var(--grey-bg);
+  }
+  .fr-hero__inner{
+    max-width:1200px;
+    margin:0 auto;
+    padding: 3rem 1.5rem 3.5rem;
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap:2.5rem;
+    align-items:center;
+  }
+  .fr-hero h1{
+    font-family: var(--serif);
+    font-weight:600;
+    font-size: clamp(1.9rem, 4vw, 2.6rem);
+    line-height:1.15;
+    margin: 0 0 1rem;
+    max-width: 20ch;
+  }
+  .fr-hero .lede{
+    font-size: 1.05rem;
+    line-height:1.6;
+    color: var(--grey-text-alt);
+    max-width: 62ch;
+    margin:0;
+  }
+  .fr-hero__badge{
+    justify-self:end;
+    text-align:center;
+  }
+  .fr-hero__badge svg{ width:120px; height:120px; }
+  .fr-hero__badge span{
+    display:block;
+    margin-top:.5rem;
+    font-size:.72rem;
+    letter-spacing:.04em;
+    color: var(--grey-text-alt);
+    max-width:130px;
+  }
+
+  .fr-breadcrumb{
+    max-width:1200px;
+    margin: 0 auto;
+    padding: .9rem 1.5rem;
+    font-size:.85rem;
+    color: var(--grey-text-alt);
+  }
+  .fr-breadcrumb a{ text-decoration:none; }
+  .fr-breadcrumb a:hover{ text-decoration:underline; }
+
+  /* ---------- Contenu / actus ---------- */
+  main{
+    max-width:1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3.5rem;
+  }
+  .section-title{
+    font-family: var(--serif);
+    font-weight:600;
+    font-size: 1.55rem;
+    margin: 0 0 1.4rem;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid var(--grey-line);
+  }
+  .actus-grid{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+  .actu-card{
+    border: 1px solid var(--grey-line);
+    background: var(--white);
+  }
+  .actu-card__tag{
+    display:inline-block;
+    background: var(--blue-france);
+    color: var(--white);
+    font-size:.72rem;
+    font-weight:600;
+    letter-spacing:.03em;
+    padding: .3rem .6rem;
+    margin: 1.1rem 0 0 1.1rem;
+  }
+  .actu-card p.body{
+    font-size:.95rem;
+    line-height:1.55;
+    padding: .9rem 1.1rem 1.3rem;
+    margin:0;
+  }
+  .actu-card a{
+    display:block;
+    text-decoration:none;
+    color: inherit;
+  }
+  .actu-card a:hover p.body{
+    text-decoration:underline;
+    text-decoration-color: var(--blue-france);
+  }
+
+  /* ---------- Bloc "démarche" ---------- */
+  .fr-callout{
+    margin-top: 2.75rem;
+    border-left: 4px solid var(--blue-france);
+    background: var(--grey-bg);
+    padding: 1.6rem 1.8rem;
+  }
+  .fr-callout h2{
+    font-family: var(--serif);
+    font-size:1.2rem;
+    margin: 0 0 .6rem;
+  }
+  .fr-callout p{
+    margin:0 0 1.1rem;
+    line-height:1.6;
+    color: var(--grey-text-alt);
+    max-width: 65ch;
+  }
+  .fr-btn{
+    display:inline-block;
+    background: var(--blue-france);
+    color: var(--white);
+    text-decoration:none;
+    font-weight:600;
+    font-size:.95rem;
+    padding: .75rem 1.4rem;
+  }
+  .fr-btn:hover{ background: var(--blue-france-sun); }
+
+  /* ---------- Footer ---------- */
+  footer.fr-footer{
+    border-top: 3px solid var(--blue-france);
+    background: var(--grey-bg);
+  }
+  .fr-footer__inner{
+    max-width:1200px;
+    margin:0 auto;
+    padding: 2.5rem 1.5rem 2rem;
+    display:grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+  }
+  .fr-footer__brand{
+    display:flex;
+    flex-direction:column;
+    gap:.9rem;
+  }
+  .fr-footer__brand svg{ width:52px; height:48px; }
+  .fr-footer__brand p{
+    font-family: var(--serif);
+    font-weight:600;
+    font-size:.9rem;
+    line-height:1.3;
+    margin:0;
+    max-width:16ch;
+  }
+  .fr-footer__cols{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .fr-footer__cols h3{
+    font-size:.82rem;
+    letter-spacing:.01em;
+    margin:0 0 .8rem;
+    color: var(--grey-text);
+  }
+  .fr-footer__cols ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:.55rem;
+  }
+  .fr-footer__cols a{
+    font-size:.88rem;
+    text-decoration:none;
+    color: var(--grey-text-alt);
+  }
+  .fr-footer__cols a:hover{ text-decoration:underline; color: var(--blue-france); }
+  .fr-footer__bottom{
+    border-top: 1px solid var(--grey-line);
+    padding: 1.1rem 1.5rem;
+    max-width:1200px;
+    margin:0 auto;
+    font-size:.78rem;
+    color: var(--grey-text-alt);
+  }
+
+  @media (max-width: 860px){
+    .fr-hero__inner{ grid-template-columns: 1fr; }
+    .fr-hero__badge{ justify-self:start; }
+    .actus-grid{ grid-template-columns: 1fr; }
+    .fr-footer__inner{ grid-template-columns: 1fr; }
+    .fr-footer__cols{ grid-template-columns: 1fr 1fr; }
+    .fr-header__body{ flex-direction:column; }
+    .fr-header__service{ border-left:none; padding-left:0; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ scroll-behavior:auto !important; }
+  }

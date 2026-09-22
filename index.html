@@ -1,15 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <link rel="stylesheet" href="CSS/style.css">
-    <title>Document</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Spectral:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+<title>Ministère du Chômage — République Française</title>
+<style>
+  
+</style>
 </head>
 <body>
-    <h1>Bienvenue au Ministère du Chômage</h1>
-    <h2>Notre mission : vous accompagner à ne surtout rien faire, avec le même sérieux administratif que n'importe quel autre ministère.
-         Formulaires en trois exemplaires, 
-        jargon incompréhensible et délais de traitement infinis inclus.</h2>
+
+<div class="tricolor" aria-hidden="true"><span class="bleu"></span><span class="blanc"></span><span class="rouge"></span></div>
+
+<header class="fr-header" role="banner">
+  <div class="fr-header__body">
+    <div class="marianne-block" aria-hidden="true">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="26" height="80" fill="#000091"/>
+        <rect x="27" y="0" width="26" height="80" fill="#ffffff" stroke="#dddddd" stroke-width="1"/>
+        <rect x="54" y="0" width="26" height="80" fill="#e1000f"/>
+        <path d="M40 14c-9 0-15 8-15 17 0 12 8 20 15 27 7-7 15-15 15-27 0-9-6-17-15-17z" fill="#161616" opacity="0.85"/>
+      </svg>
+      <span class="rf-1">RÉPUBLIQUE</span>
+      <span class="rf-2">FRANÇAISE</span>
+    </div>
+    <div class="fr-header__service">
+      <p class="fr-header__service-title">Ministère du Chômage</p>
+      <p class="fr-header__service-tagline">Liberté &nbsp;·&nbsp; Égalité &nbsp;·&nbsp; Fraternité</p>
+    </div>
+  </div>
+  <nav class="fr-nav" aria-label="Menu principal">
+    <ul>
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#">Démarches administratives</a></li>
+      <li><a href="#">Formulaires en trois exemplaires</a></li>
+      <li><a href="#actus">Actualités</a></li>
+      <li><a href="#">Nous ne pas contacter</a></li>
+    </ul>
+  </nav>
+</header>
+
+<p class="fr-breadcrumb"><a href="#">gouv.fr</a> › <a href="#">Ministères</a> › Ministère du Chômage</p>
+
+<section class="fr-hero" id="accueil">
+  <div class="fr-hero__inner">
+    <div>
+      <h1>Bienvenue au Ministère du Chômage</h1>
+      <p class="lede">Notre mission : vous accompagner à ne surtout rien faire, avec le même sérieux administratif que n'importe quel autre ministère. Formulaires en trois exemplaires, jargon incompréhensible et délais de traitement infinis inclus.</p>
+    </div>
+    <div class="fr-hero__badge">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="38" fill="none" stroke="#000091" stroke-width="2"/>
+        <circle cx="40" cy="40" r="30" fill="none" stroke="#e1000f" stroke-width="1"/>
+        <text x="40" y="36" text-anchor="middle" font-family="Spectral, serif" font-size="9" fill="#161616" font-weight="600">SERVICE</text>
+        <text x="40" y="48" text-anchor="middle" font-family="Spectral, serif" font-size="9" fill="#161616" font-weight="600">PUBLIC</text>
+        <text x="40" y="58" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="6" fill="#3a3a3a">de l'inaction</text>
+      </svg>
+      <span>Certifié conforme à la lenteur républicaine</span>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section id="actus" aria-labelledby="actus-title">
+    <h2 class="section-title" id="actus-title">Actualités</h2>
+    <ul class="actus-grid">
+      <li class="actu-card">
+        <a href="#">
+          <span class="actu-card__tag">Communiqué</span>
+          <p class="body">Le Ministère du Chômage lance une nouvelle initiative pour encourager l'inaction.</p>
+        </a>
+      </li>
+      <li class="actu-card">
+        <a href="#">
+          <span class="actu-card__tag">Démarche</span>
+          <p class="body">Découvrez nos nouvelles procédures administratives pour maximiser votre temps libre.</p>
+        </a>
+      </li>
+      <li class="actu-card">
+        <a href="#">
+          <span class="actu-card__tag">Évènement</span>
+          <p class="body">Participez à notre concours annuel de procrastination et gagnez des prix incroyables !</p>
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <div class="fr-callout">
+    <h2>Une question ? Une démarche à ne pas faire ?</h2>
+    <p>Nos guichets sont ouverts de jamais à jamais. Un agent ne vous recontactera sous aucun délai déterminé.</p>
+    <a class="fr-btn" href="#">Ne rien entreprendre</a>
+  </div>
+</main>
+
+<footer class="fr-footer" role="contentinfo">
+  <div class="fr-footer__inner">
+    <div class="fr-footer__brand">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <rect x="0" y="0" width="26" height="80" fill="#000091"/>
+        <rect x="27" y="0" width="26" height="80" fill="#ffffff" stroke="#dddddd" stroke-width="1"/>
+        <rect x="54" y="0" width="26" height="80" fill="#e1000f"/>
+      </svg>
+      <p>Ministère du Chômage République Française</p>
+    </div>
+    <div class="fr-footer__cols">
+      <div>
+        <h3>Le ministère</h3>
+        <ul>
+          <li><a href="#">Organigramme fantôme</a></li>
+          <li><a href="#">Rapports jamais publiés</a></li>
+          <li><a href="#">Nous recruter à ne rien faire</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Ressources</h3>
+        <ul>
+          <li><a href="#">Formulaire Cerfa n°00000</a></li>
+          <li><a href="#">Foire aux excuses</a></li>
+          <li><a href="#">Statistiques introuvables</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Informations légales</h3>
+        <ul>
+          <li><a href="#">Mentions inutiles</a></li>
+          <li><a href="#">Accessibilité : non conforme</a></li>
+          <li><a href="#">Plan du site (vide)</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="fr-footer__bottom">© République Française — Ministère du Chômage. Site parodique, aucune démarche réelle n'est possible ici.</p>
+</footer>
+
 </body>
 </html>
