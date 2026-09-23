@@ -1,0 +1,45 @@
+/* Le DSFR (dsfr.min.css, chargé via CDN dans index.html) gère déjà le header,
+   la navigation, le fil d'Ariane, les cartes, les badges et le footer.
+   Ce fichier ne contient que la mise en page spécifique à cette page (hero). */
+
+.fr-hero{
+  background: var(--background-alt-blue-france, #f5f5fe);
+}
+.fr-hero__inner{
+  max-width: 78rem;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 3.5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2.5rem;
+  align-items: center;
+}
+.fr-hero h1{
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  max-width: 20ch;
+}
+.fr-hero .lede{
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 62ch;
+  margin: 0;
+}
+.fr-hero__badge{
+  justify-self: end;
+  text-align: center;
+}
+.fr-hero__badge svg{ width: 120px; height: 120px; }
+.fr-hero__badge span{
+  display: block;
+  margin-top: .5rem;
+  font-size: .72rem;
+  letter-spacing: .04em;
+  max-width: 130px;
+}
+
+@media (max-width: 860px){
+  .fr-hero__inner{ grid-template-columns: 1fr; }
+  .fr-hero__badge{ justify-self: start; }
+}
