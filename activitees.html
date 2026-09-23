@@ -7,7 +7,7 @@
 <script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.module.min.js"></script>
 <script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.nomodule.min.js"></script>
 <link rel="icon" href="files/icon.ico" type="image/x-icon">
-<title>Ministère du Chômage — Paperasse</title>
+<title>Ministère du Chômage — République Française</title>
 <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
@@ -49,9 +49,9 @@
       <div class="fr-header__menu-links"></div>
       <nav class="fr-nav" id="navigation-principale" role="navigation" aria-label="Menu principal">
         <ul class="fr-nav__list">
-          <li class="fr-nav__item"><a class="fr-nav__link" href="accueil.html">Accueil</a></li>
-          <li class="fr-nav__item"><a class="fr-nav__link" href="documents.html" aria-current="page">Démarches administratives</a></li>
-          <li class="fr-nav__item"><a class="fr-nav__link" href="activitees.html">Carte des activitées</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="index.html">Accueil</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="documents.html">Démarches administratives</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="activitees.html" aria-current="page">Carte des activitées</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="actu.html">Actualités</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="contact.html">Ne pas nous contacter</a></li>
         </ul>
@@ -63,8 +63,8 @@
 <section class="fr-hero" id="accueil">
   <div class="fr-hero__inner">
     <div>
-      <h1>Démarches administrative</h1>
-      <p class="lede">Dévcouvez les papiers, les documents, les dossiers, les pièces justificatives, et les autres documents administratifs vous aidant dans votre grand projet de rester au chômage.</p>
+      <h1>Bienvenue au Ministère du Chômage</h1>
+      <p class="lede">Notre mission (Parodique bien sur) : vous accompagner à ne surtout rien faire, avec le même sérieux administratif que n'importe quel autre ministère. Formulaires en trois exemplaires, jargon incompréhensible et délais de traitement infinis inclus.</p>
     </div>
     <div class="fr-hero__badge">
       <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
@@ -79,51 +79,56 @@
   </div>
 </section>
 
-<br>
-
 <main class="fr-container">
-
-  <div id="doc1">
-    <h3>Déclaration de non-recherche d'emploi</h3>
-    <p>Ici, téléchargez la preuve que vous êtes un réel chomeur et que, par conséquent, vous êtes engagés à ne pas lancer de recherches d'emploi.</p>
-    <p>Une fois rempli, tout accès au portail de France Travail vous sera suspendu, et vous serez obligé de vous déconnecter de votre compte.</p>
-    <p>A quoi bon pourrait vous servir France Travail après tout ? Votre chômage est un véritable bien-être, pas de travail, pas de problèmes !</p>
-
-    <br>
-
-    <a href="docs/cerfa-00000-declaration-non-recherche.pdf" class="fr-btn" download="Déclaration de non-recherche d'emploi">Télécharger le document</a>
-  </div>
+  <section id="actus" aria-labelledby="actus-title" class="fr-mt-6w">
+    <h2 id="actus-title">Actualités</h2>
+    <div class="fr-grid-row fr-grid-row--gutters">
+      <div class="fr-col-12 fr-col-md-4">
+        <div class="fr-card fr-enlarge-link">
+          <div class="fr-card__body">
+            <div class="fr-card__content">
+              <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué</p>
+              <h3 class="fr-card__title">
+                <a href="#">Le Ministère du Chômage lance une nouvelle initiative pour encourager l'inaction.</a>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fr-col-12 fr-col-md-4">
+        <div class="fr-card fr-enlarge-link">
+          <div class="fr-card__body">
+            <div class="fr-card__content">
+              <p class="fr-badge fr-badge--green-emeraude fr-badge--no-icon">Démarche</p>
+              <h3 class="fr-card__title">
+                <a href="#">Découvrez nos nouvelles procédures administratives pour maximiser votre temps libre.</a>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fr-col-12 fr-col-md-4">
+        <div class="fr-card fr-enlarge-link">
+          <div class="fr-card__body">
+            <div class="fr-card__content">
+              <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon">Évènement</p>
+              <h3 class="fr-card__title">
+                <a href="#">Participez à notre concours annuel de procrastination et gagnez des prix incroyables !</a>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <br>
 
-    <div id="doc2">
-    <h3>Attestation de droit à la flemme</h3>
-    <p>Si vous n'êtes pas sûr de vouloir passer au chômage, vous pouvez demander un essai gratuit à votre employeur.</p>
-    <p>Ce dernier sera forcé par la DGSI d'accepter votre demande, et vous pourrez alors passer en periode d'essai du chômage sur une durée d'un mois (historiquement, il s'agissait d'une période d'essai de deux mois mais la dette publique nous force à la réduire de 50%).</p>
-
-
-    <br>
-
-    <a href="docs/cerfa-00001-attestation-flemme.pdf" class="fr-btn" download="Déclaration de non-recherche d'emploi">Télécharger le document</a>
+  <div class="fr-callout">
+    <h2 class="fr-callout__title">Une question ? Une démarche à ne pas faire ?</h2>
+    <p class="fr-callout__text">Nos guichets sont ouverts de jamais à jamais. Un agent ne vous recontactera sous aucun délai déterminé.</p>
+    <a class="fr-btn" href="#">Ne rien entreprendre</a>
   </div>
-
-  <br>
-
-    <div id="doc3">
-    <h3>Contrat de maintien au chomage volontaire</h3>
-    <p>Si vous êtes un chômeur volontaire, vous pouvez demander à signer un contrat de maintien au chômage volontaire.
-    <p>Veuillez vous lever et vous diriger vers vos stylos (si vous en avez) afin de vous pencher sur ce papier et le signer pour avoir accès aux très nombreuses aides d'état. </p>
-    <p>Nous précisons que malheureusement, le renvoi de ce papier au ministère est obligatoire, vous serez donc contraint de sortir de chez vous et aller l'envoyer à la Poste à l'adresse du Ministère:</p>
-    <p>41 Lieu di Je-Kenne – Paris 75008 – France</p>
-    <p>Une fois signé, vous recevrez (peut être) un courrier à l'adresse indiquée dans le contrat de maintien au chômage volontaire dans un délai d'un mandat présidentiel.</p>
-
-    <br>
-
-    <a href="docs/cerfa-00002-maintien-chomage-volontaire.pdf" class="fr-btn" download="Déclaration de non-recherche d'emploi">Télécharger le document</a>
-  </div>
-
-  <br>
-
 </main>
 
 <footer class="fr-footer" role="contentinfo" id="footer">
