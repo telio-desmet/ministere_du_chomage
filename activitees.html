@@ -9,9 +9,26 @@
 <link rel="icon" href="files/icon.ico" type="image/x-icon">
 <title>Ministère du Chômage — République Française</title>
 <link rel="stylesheet" href="CSS/style.css">
-</head>
-<body>
 
+<!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- DSFR : CSS core + utilitaires (via jsDelivr, package npm officiel @gouvfr/dsfr) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.1/dist/dsfr.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.1/dist/utility/utility.min.css">
+  <style>
+    /* Réglages propres à cette page uniquement (la mise en page vient du DSFR) */
+    #map {
+      height: 480px;
+      width: 100%;
+      border: 1px solid var(--border-default-grey);
+    }
+    .fr-alert--geoloc {
+      margin-bottom: 1.5rem;
+    }
+  </style>
+</head>
+
+<body>
 <header role="banner" class="fr-header">
   <div class="fr-header__body">
     <div class="fr-container">
@@ -63,8 +80,8 @@
 <section class="fr-hero" id="accueil">
   <div class="fr-hero__inner">
     <div>
-      <h1>Bienvenue au Ministère du Chômage</h1>
-      <p class="lede">Notre mission (Parodique bien sur) : vous accompagner à ne surtout rien faire, avec le même sérieux administratif que n'importe quel autre ministère. Formulaires en trois exemplaires, jargon incompréhensible et délais de traitement infinis inclus.</p>
+      <h1>Trouver des activités adaptées à votre situation</h1>
+      <p class="lede">Venez découvrir les activités près de chez vous , afin de vous accompagner dans votre recherche d'inactivitée.</p>
     </div>
     <div class="fr-hero__badge">
       <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
@@ -78,58 +95,85 @@
     </div>
   </div>
 </section>
+  <main role="main" id="contenu">
+    <div class="fr-container fr-py-6w">
 
-<main class="fr-container">
-  <section id="actus" aria-labelledby="actus-title" class="fr-mt-6w">
-    <h2 id="actus-title">Actualités</h2>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-12 fr-col-md-4">
-        <div class="fr-card fr-enlarge-link">
-          <div class="fr-card__body">
-            <div class="fr-card__content">
-              <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué</p>
-              <h3 class="fr-card__title">
-                <a href="#">Le Ministère du Chômage lance une nouvelle initiative pour encourager l'inaction.</a>
-              </h3>
-            </div>
-          </div>
-        </div>
+      <h1>Votre position</h1>
+      <p class="fr-text--lead">
+        Cette page utilise votre position pour vous montrer les services les plus proches.
+      </p>
+
+      <div id="geoloc-alert" class="fr-alert fr-alert--info fr-alert--geoloc" hidden>
+        <h3 class="fr-alert__title" id="geoloc-alert-title">Localisation</h3>
+        <p id="geoloc-alert-text"></p>
       </div>
-      <div class="fr-col-12 fr-col-md-4">
-        <div class="fr-card fr-enlarge-link">
-          <div class="fr-card__body">
-            <div class="fr-card__content">
-              <p class="fr-badge fr-badge--green-emeraude fr-badge--no-icon">Démarche</p>
-              <h3 class="fr-card__title">
-                <a href="#">Découvrez nos nouvelles procédures administratives pour maximiser votre temps libre.</a>
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="fr-col-12 fr-col-md-4">
-        <div class="fr-card fr-enlarge-link">
-          <div class="fr-card__body">
-            <div class="fr-card__content">
-              <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon">Évènement</p>
-              <h3 class="fr-card__title">
-                <a href="#">Participez à notre concours annuel de procrastination et gagnez des prix incroyables !</a>
-              </h3>
-            </div>
-          </div>
-        </div>
-      </div>
+
+      <div id="map"></div>
+
+      <p class="fr-hint-text fr-mt-2w">
+        Si vous refusez la géolocalisation, la carte reste centrée sur Paris.
+      </p>
+
     </div>
-  </section>
+  </main>
+  <!-- Leaflet -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-  <br>
+  <!-- DSFR JS (nécessaire pour les composants interactifs comme les alertes) -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.1/dist/dsfr.module.min.js"></script>
+  <script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.1/dist/dsfr.nomodule.min.js"></script>
+  <script>
+    // Position par défaut : Paris
+    const defaultCoords = [48.8566, 2.3522];
+    const map = L.map('map').setView(defaultCoords, 13);
 
-  <div class="fr-callout">
-    <h2 class="fr-callout__title">Une question ? Une démarche à ne pas faire ?</h2>
-    <p class="fr-callout__text">Nos guichets sont ouverts de jamais à jamais. Un agent ne vous recontactera sous aucun délai déterminé.</p>
-    <a class="fr-btn" href="#">Ne rien entreprendre</a>
-  </div>
-</main>
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19
+    }).addTo(map);
+
+    const alertBox = document.getElementById('geoloc-alert');
+    const alertTitle = document.getElementById('geoloc-alert-title');
+    const alertText = document.getElementById('geoloc-alert-text');
+
+    function showAlert(type, title, text) {
+      alertBox.hidden = false;
+      alertBox.classList.remove('fr-alert--info', 'fr-alert--success', 'fr-alert--warning', 'fr-alert--error');
+      alertBox.classList.add('fr-alert--' + type);
+      alertTitle.textContent = title;
+      alertText.textContent = text;
+    }
+
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+        enableHighAccuracy: true,
+        timeout: 10000,
+        maximumAge: 0
+      });
+    } else {
+      showAlert('warning', 'Géolocalisation indisponible', "Votre navigateur ne prend pas en charge la géolocalisation.");
+    }
+
+    function successCallback(position) {
+      const { latitude, longitude } = position.coords;
+      map.setView([latitude, longitude], 15);
+      L.marker([latitude, longitude]).addTo(map)
+        .bindPopup('Vous êtes ici')
+        .openPopup();
+      showAlert('success', 'Position trouvée', "Carte centrée sur votre position actuelle.");
+    }
+
+    function errorCallback(error) {
+      const messages = {
+        1: "Vous avez refusé le partage de votre position.",
+        2: "Votre position est indisponible pour le moment.",
+        3: "La demande de position a expiré."
+      };
+      showAlert('warning', 'Géolocalisation refusée ou indisponible', messages[error.code] || error.message);
+    }
+  </script>
+
+
 
 <footer class="fr-footer" role="contentinfo" id="footer">
   <div class="fr-container">
