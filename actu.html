@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.min.css">
 <script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.module.min.js"></script>
 <script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.nomodule.min.js"></script>
-<title>Ministère du Chômage — République Française</title>
+<title>Actualités — Ministère du Chômage — République Française</title>
 <link rel="stylesheet" href="CSS/style.css">
 </head>
 <body>
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="fr-header__service">
-            <a href="#accueil" title="Accueil — Ministère du Chômage">
+            <a href="index.html#accueil" title="Accueil — Ministère du Chômage">
               <p class="fr-header__service-title">Ministère du Chômage</p>
             </a>
             <p class="fr-header__service-tagline">Liberté &nbsp;·&nbsp; Égalité &nbsp;·&nbsp; Fraternité</p>
@@ -48,10 +48,10 @@
       <div class="fr-header__menu-links"></div>
       <nav class="fr-nav" id="navigation-principale" role="navigation" aria-label="Menu principal">
         <ul class="fr-nav__list">
-          <li class="fr-nav__item"><a class="fr-nav__link" href="#accueil" aria-current="page">Accueil</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="index.html">Accueil</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="#">Démarches administratives</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="#">Formulaires en trois exemplaires</a></li>
-          <li class="fr-nav__item"><a class="fr-nav__link" href="#actus">Actualités</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="#actus" aria-current="page">Actualités</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="#">Nous ne pas contacter</a></li>
         </ul>
       </nav>
@@ -59,82 +59,362 @@
   </div>
 </header>
 
-<section class="fr-hero" id="accueil">
+<section class="fr-hero" id="actus">
   <div class="fr-hero__inner">
     <div>
-      <h1>Bienvenue au Ministère du Chômage</h1>
-      <p class="lede">Notre mission (Parodique bien sur) : vous accompagner à ne surtout rien faire, avec le même sérieux administratif que n'importe quel autre ministère. Formulaires en trois exemplaires, jargon incompréhensible et délais de traitement infinis inclus.</p>
+      <h1>Actualités du Ministère</h1>
+      <p class="lede">Toute l'inaction gouvernementale en temps quasi-réel. Communiqués, démarches à ne pas faire et circulaires que personne ne lira, classés par ordre décroissant d'utilité (c'est-à-dire aucun ordre en particulier).</p>
     </div>
     <div class="fr-hero__badge">
       <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
         <circle cx="40" cy="40" r="38" fill="none" stroke="#000091" stroke-width="2"/>
         <circle cx="40" cy="40" r="30" fill="none" stroke="#e1000f" stroke-width="1"/>
-        <text x="40" y="36" text-anchor="middle" font-family="Spectral, serif" font-size="9" fill="#161616" font-weight="600">SERVICE</text>
-        <text x="40" y="48" text-anchor="middle" font-family="Spectral, serif" font-size="9" fill="#161616" font-weight="600">PUBLIC</text>
-        <text x="40" y="58" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="6" fill="#3a3a3a">de l'inaction</text>
+        <text x="40" y="36" text-anchor="middle" font-family="Spectral, serif" font-size="9" fill="#161616" font-weight="600">FLASH</text>
+        <text x="40" y="48" text-anchor="middle" font-family="Spectral, serif" font-size="9" fill="#161616" font-weight="600">INFO</text>
+        <text x="40" y="58" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="6" fill="#3a3a3a">non vérifiée</text>
       </svg>
-      <span>Certifié conforme à la lenteur républicaine</span>
+      <span>Mise à jour jamais</span>
     </div>
   </div>
 </section>
 
 <main class="fr-container">
-  <section id="actus" aria-labelledby="actus-title" class="fr-mt-6w">
-    <h2 id="actus-title">Actualités</h2>
+
+  <section aria-labelledby="une-title" class="fr-mt-6w">
+    <h2 id="une-title">À la une</h2>
     <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-12 fr-col-md-4">
-        <div class="fr-card fr-enlarge-link">
+
+      <div class="fr-col-12">
+        <div class="fr-card fr-card--horizontal fr-enlarge-link">
           <div class="fr-card__body">
             <div class="fr-card__content">
-              <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué</p>
-              <h3 class="fr-card__title">
-                <a href="#">Le Ministère du Chômage lance une nouvelle initiative pour encourager l'inaction.</a>
-              </h3>
+              <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué officiel</p>
+              <h3 class="fr-card__title"><a href="#modal-una" aria-controls="modal-una" data-fr-opened="false">Le Ministère annonce le lancement du RSA Canapé, une allocation majorée pour les usagers restant allongés plus de 14h par jour</a></h3>
+              <p class="fr-card__desc">Une étude interne (menée par personne, sur un coin de table) démontre qu'un citoyen allongé ne peut statistiquement pas occuper un poste vacant. Le dispositif entrera en vigueur dès que le formulaire Cerfa correspondant aura été inventé.</p>
             </div>
+          </div>
+          <div class="fr-card__img">
+            <svg viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration d'un canapé et d'une télécommande">
+              <rect width="300" height="200" fill="#f6f6f6"/>
+              <rect x="30" y="110" width="240" height="55" rx="10" fill="#000091"/>
+              <rect x="30" y="80" width="55" height="45" rx="10" fill="#000091"/>
+              <rect x="215" y="80" width="55" height="45" rx="10" fill="#000091"/>
+              <rect x="40" y="160" width="14" height="20" fill="#161616"/>
+              <rect x="246" y="160" width="14" height="20" fill="#161616"/>
+              <rect x="120" y="55" width="26" height="55" rx="6" fill="#e1000f"/>
+              <circle cx="133" cy="65" r="3" fill="#fff"/>
+              <circle cx="133" cy="75" r="3" fill="#fff"/>
+              <circle cx="133" cy="85" r="3" fill="#fff"/>
+            </svg>
           </div>
         </div>
       </div>
+
+    </div>
+  </section>
+
+  <section aria-labelledby="actus-liste-title" class="fr-mt-6w">
+    <h2 id="actus-liste-title">Toutes les actualités</h2>
+    <div class="fr-grid-row fr-grid-row--gutters">
+
       <div class="fr-col-12 fr-col-md-4">
         <div class="fr-card fr-enlarge-link">
+          <div class="fr-card__img">
+            <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration d'un réveil éteint">
+              <rect width="300" height="160" fill="#f6f6f6"/>
+              <circle cx="150" cy="90" r="48" fill="#000091"/>
+              <circle cx="150" cy="90" r="38" fill="#f6f6f6"/>
+              <rect x="146" y="60" width="8" height="32" rx="4" fill="#161616"/>
+              <rect x="150" y="88" width="26" height="8" rx="4" fill="#161616"/>
+              <rect x="112" y="42" width="16" height="16" rx="3" fill="#e1000f" transform="rotate(-30 120 50)"/>
+              <rect x="172" y="42" width="16" height="16" rx="3" fill="#e1000f" transform="rotate(30 180 50)"/>
+              <text x="150" y="135" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="12" fill="#e1000f" font-weight="700">SNOOZE ×∞</text>
+            </svg>
+          </div>
           <div class="fr-card__body">
             <div class="fr-card__content">
               <p class="fr-badge fr-badge--green-emeraude fr-badge--no-icon">Démarche</p>
-              <h3 class="fr-card__title">
-                <a href="#">Découvrez nos nouvelles procédures administratives pour maximiser votre temps libre.</a>
-              </h3>
+              <h3 class="fr-card__title"><a href="#modal-snooze" aria-controls="modal-snooze" data-fr-opened="false">Nouvelle procédure : reportez indéfiniment votre rendez-vous conseiller grâce au bouton "Snooze administratif"</a></h3>
+              <p class="fr-card__desc">Disponible sur votre espace personnel, ce bouton repousse automatiquement votre convocation de 3 mois, chaque fois que vous cliquez dessus. Il n'y a pas de limite. Il n'y a pas non plus de conseiller.</p>
             </div>
           </div>
         </div>
       </div>
+
       <div class="fr-col-12 fr-col-md-4">
         <div class="fr-card fr-enlarge-link">
+          <div class="fr-card__img">
+            <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration d'une pile de formulaires en triple exemplaire">
+              <rect width="300" height="160" fill="#f6f6f6"/>
+              <rect x="90" y="100" width="120" height="40" fill="#fff" stroke="#000091" stroke-width="2"/>
+              <rect x="98" y="85" width="120" height="40" fill="#fff" stroke="#000091" stroke-width="2"/>
+              <rect x="106" y="70" width="120" height="40" fill="#fff" stroke="#e1000f" stroke-width="2"/>
+              <line x1="116" y1="80" x2="200" y2="80" stroke="#161616" stroke-width="2"/>
+              <line x1="116" y1="90" x2="180" y2="90" stroke="#161616" stroke-width="2"/>
+              <line x1="116" y1="100" x2="190" y2="100" stroke="#161616" stroke-width="2"/>
+            </svg>
+          </div>
+          <div class="fr-card__body">
+            <div class="fr-card__content">
+              <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon">Circulaire</p>
+              <h3 class="fr-card__title"><a href="#modal-cerfa" aria-controls="modal-cerfa" data-fr-opened="false">Le formulaire Cerfa n°00000 passe de trois à sept exemplaires "pour plus de simplicité"</a></h3>
+              <p class="fr-card__desc">Chaque exemplaire devra être envoyé à un guichet différent, dont deux n'existent pas encore et un a fermé en 1998. Un accusé de non-réception vous sera adressé sous 18 mois.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fr-col-12 fr-col-md-4">
+        <div class="fr-card fr-enlarge-link">
+          <div class="fr-card__img">
+            <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration d'une tasse de café fumante">
+              <rect width="300" height="160" fill="#f6f6f6"/>
+              <path d="M110 80 h80 v40 a40 40 0 0 1 -80 0 z" fill="#000091"/>
+              <path d="M190 90 h14 a14 14 0 0 1 0 28 h-14 z" fill="none" stroke="#000091" stroke-width="6"/>
+              <path d="M125 70 q5 -10 0 -20" stroke="#e1000f" stroke-width="3" fill="none"/>
+              <path d="M145 70 q5 -10 0 -20" stroke="#e1000f" stroke-width="3" fill="none"/>
+              <path d="M165 70 q5 -10 0 -20" stroke="#e1000f" stroke-width="3" fill="none"/>
+            </svg>
+          </div>
+          <div class="fr-card__body">
+            <div class="fr-card__content">
+              <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué</p>
+              <h3 class="fr-card__title"><a href="#modal-cafe" aria-controls="modal-cafe" data-fr-opened="false">Expérimentation régionale : la "pause café obligatoire" étendue à 6h par jour dans l'Avesnois-Valenciennois</a></h3>
+              <p class="fr-card__desc">Le Ministère salue une initiative locale pionnière visant à occuper le temps théoriquement libéré par la recherche d'emploi, sans jamais y consacrer une seule minute.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fr-col-12 fr-col-md-4">
+        <div class="fr-card fr-enlarge-link">
+          <div class="fr-card__img">
+            <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration d'un labyrinthe administratif">
+              <rect width="300" height="160" fill="#f6f6f6"/>
+              <rect x="40" y="30" width="220" height="100" fill="none" stroke="#000091" stroke-width="3"/>
+              <line x1="40" y1="60" x2="180" y2="60" stroke="#000091" stroke-width="3"/>
+              <line x1="100" y1="60" x2="100" y2="100" stroke="#000091" stroke-width="3"/>
+              <line x1="100" y1="100" x2="220" y2="100" stroke="#000091" stroke-width="3"/>
+              <line x1="220" y1="60" x2="220" y2="130" stroke="#000091" stroke-width="3"/>
+              <circle cx="250" cy="130" r="6" fill="#e1000f"/>
+              <circle cx="50" cy="45" r="6" fill="#e1000f"/>
+            </svg>
+          </div>
+          <div class="fr-card__body">
+            <div class="fr-card__content">
+              <p class="fr-badge fr-badge--green-emeraude fr-badge--no-icon">Démarche</p>
+              <h3 class="fr-card__title"><a href="#modal-labyrinthe" aria-controls="modal-labyrinthe" data-fr-opened="false">Le parcours "trouvez le bon guichet" transformé en jeu de piste national avec tirage au sort des lots</a></h3>
+              <p class="fr-card__desc">Aucun participant n'a encore atteint la sortie du labyrinthe administratif depuis sa mise en service en 2011. Le premier arrivé recevra un accusé de réception en bonne et due forme.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fr-col-12 fr-col-md-4">
+        <div class="fr-card fr-enlarge-link">
+          <div class="fr-card__img">
+            <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration d'un calendrier avec des jours barrés">
+              <rect width="300" height="160" fill="#f6f6f6"/>
+              <rect x="80" y="40" width="140" height="100" rx="6" fill="#fff" stroke="#000091" stroke-width="3"/>
+              <rect x="80" y="40" width="140" height="24" fill="#e1000f"/>
+              <line x1="105" y1="30" x2="105" y2="50" stroke="#161616" stroke-width="4"/>
+              <line x1="195" y1="30" x2="195" y2="50" stroke="#161616" stroke-width="4"/>
+              <line x1="90" y1="90" x2="210" y2="120" stroke="#161616" stroke-width="3"/>
+              <line x1="90" y1="120" x2="210" y2="90" stroke="#161616" stroke-width="3"/>
+            </svg>
+          </div>
           <div class="fr-card__body">
             <div class="fr-card__content">
               <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon">Évènement</p>
-              <h3 class="fr-card__title">
-                <a href="#">Participez à notre concours annuel de procrastination et gagnez des prix incroyables !</a>
-              </h3>
+              <h3 class="fr-card__title"><a href="#modal-calendrier" aria-controls="modal-calendrier" data-fr-opened="false">Journée nationale du "je le ferai demain" : succès record avec zéro dossier déposé</a></h3>
+              <p class="fr-card__desc">Le Ministère se félicite de cette édition, la meilleure depuis la création de l'évènement, aucun objectif chiffré n'ayant été atteint, comme prévu au cahier des charges.</p>
             </div>
           </div>
         </div>
       </div>
+
+      <div class="fr-col-12 fr-col-md-4">
+        <div class="fr-card fr-enlarge-link">
+          <div class="fr-card__img">
+            <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Illustration d'un trophée de procrastination">
+              <rect width="300" height="160" fill="#f6f6f6"/>
+              <path d="M120 40 h60 v30 a30 30 0 0 1 -60 0 z" fill="#000091"/>
+              <rect x="142" y="100" width="16" height="20" fill="#000091"/>
+              <rect x="120" y="120" width="60" height="12" rx="4" fill="#e1000f"/>
+              <path d="M120 50 q-25 0 -20 25" stroke="#000091" stroke-width="5" fill="none"/>
+              <path d="M180 50 q25 0 20 25" stroke="#000091" stroke-width="5" fill="none"/>
+            </svg>
+          </div>
+          <div class="fr-card__body">
+            <div class="fr-card__content">
+              <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Évènement</p>
+              <h3 class="fr-card__title"><a href="#modal-trophee" aria-controls="modal-trophee" data-fr-opened="false">Résultats du concours annuel de procrastination : le jury n'a toujours pas délibéré</a></h3>
+              <p class="fr-card__desc">La remise des prix, initialement prévue l'an dernier, est reportée à une date qui sera elle-même reportée. Les candidats sont invités à ne rien faire en attendant.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
   <br>
-  
+
   <div class="fr-callout">
-    <h2 class="fr-callout__title">Une question ? Une démarche à ne pas faire ?</h2>
-    <p class="fr-callout__text">Nos guichets sont ouverts de jamais à jamais. Un agent ne vous recontactera sous aucun délai déterminé.</p>
-    <a class="fr-btn" href="#">Ne rien entreprendre</a>
+    <h2 class="fr-callout__title">Envie de ne rien manquer ?</h2>
+    <p class="fr-callout__text">Abonnez-vous à notre lettre d'information mensuelle, envoyée tous les 36 du mois, pour recevoir l'intégralité de ces actualités que vous venez déjà de lire.</p>
+    <a class="fr-btn" href="#">Ne pas s'abonner</a>
   </div>
+
 </main>
+
+<dialog aria-labelledby="modal-una-title" id="modal-una" class="fr-modal">
+  <div class="fr-container fr-container--fluid fr-container-md">
+    <div class="fr-grid-row fr-grid-row--center">
+      <div class="fr-col-12 fr-col-md-8 fr-col-lg-6">
+        <div class="fr-modal__body">
+          <div class="fr-modal__header">
+            <button class="fr-btn--close fr-btn" aria-controls="modal-una">Fermer</button>
+          </div>
+          <div class="fr-modal__content">
+            <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon fr-mb-2w">Communiqué officiel</p>
+            <h1 id="modal-una-title" class="fr-modal__title">Le RSA Canapé, mode d'emploi</h1>
+            <p>L'allocation sera versée automatiquement dès lors qu'un capteur de mouvement, installé aux frais du bénéficiaire, certifiera une inactivité horizontale d'au moins 14 heures consécutives.</p>
+            <p>Le taux plein est porté à 14h30 pour les usagers ayant en plus regardé un épisode de télé-achat sans passer commande. Le dossier de demande comporte 12 pages et doit être rempli debout, par souci de cohérence administrative.</p>
+            <p>Une commission se réunira "prochainement" pour statuer sur les cas de canapés-lits, jugés litigieux.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog aria-labelledby="modal-snooze-title" id="modal-snooze" class="fr-modal">
+  <div class="fr-container fr-container--fluid fr-container-md">
+    <div class="fr-grid-row fr-grid-row--center">
+      <div class="fr-col-12 fr-col-md-8 fr-col-lg-6">
+        <div class="fr-modal__body">
+          <div class="fr-modal__header">
+            <button class="fr-btn--close fr-btn" aria-controls="modal-snooze">Fermer</button>
+          </div>
+          <div class="fr-modal__content">
+            <p class="fr-badge fr-badge--green-emeraude fr-badge--no-icon fr-mb-2w">Démarche</p>
+            <h1 id="modal-snooze-title" class="fr-modal__title">Le bouton "Snooze administratif"</h1>
+            <p>Disponible depuis votre espace personnel, ce bouton envoie un e-mail de report à un conseiller dont la boîte mail est configurée pour rejeter automatiquement tout message contenant le mot "rendez-vous".</p>
+            <p>Chaque clic génère un nouvel accusé de report, imprimable en trois exemplaires. Aucun rendez-vous "snoozé" n'a, à ce jour, été reprogrammé.</p>
+            <p>Le Ministère étudie une version mobile de l'application, dont le développement a lui-même été reporté.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog aria-labelledby="modal-cerfa-title" id="modal-cerfa" class="fr-modal">
+  <div class="fr-container fr-container--fluid fr-container-md">
+    <div class="fr-grid-row fr-grid-row--center">
+      <div class="fr-col-12 fr-col-md-8 fr-col-lg-6">
+        <div class="fr-modal__body">
+          <div class="fr-modal__header">
+            <button class="fr-btn--close fr-btn" aria-controls="modal-cerfa">Fermer</button>
+          </div>
+          <div class="fr-modal__content">
+            <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon fr-mb-2w">Circulaire</p>
+            <h1 id="modal-cerfa-title" class="fr-modal__title">Sept exemplaires, sept destins</h1>
+            <p>Exemplaire 1 : archivé sans être lu. Exemplaire 2 : envoyé à un service fusionné en 2016. Exemplaire 3 : perdu volontairement pour "fluidifier le circuit".</p>
+            <p>Exemplaires 4 à 6 : à conserver par l'usager "au cas où", sans que personne ne sache de quel cas il s'agit. Exemplaire 7 : optionnel, mais son absence entraîne le rejet des six premiers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog aria-labelledby="modal-cafe-title" id="modal-cafe" class="fr-modal">
+  <div class="fr-container fr-container--fluid fr-container-md">
+    <div class="fr-grid-row fr-grid-row--center">
+      <div class="fr-col-12 fr-col-md-8 fr-col-lg-6">
+        <div class="fr-modal__body">
+          <div class="fr-modal__header">
+            <button class="fr-btn--close fr-btn" aria-controls="modal-cafe">Fermer</button>
+          </div>
+          <div class="fr-modal__content">
+            <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon fr-mb-2w">Communiqué</p>
+            <h1 id="modal-cafe-title" class="fr-modal__title">La pause café obligatoire, expliquée</h1>
+            <p>Portée à 6 heures quotidiennes à titre expérimental, la pause café reste, à ce stade, la seule politique publique locale à afficher un taux de satisfaction de 100 %.</p>
+            <p>Le Ministère précise que le café lui-même reste facultatif : seule la pause est obligatoire. Un rapport d'évaluation est prévu, mais personne n'aura le temps de le rédiger.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog aria-labelledby="modal-labyrinthe-title" id="modal-labyrinthe" class="fr-modal">
+  <div class="fr-container fr-container--fluid fr-container-md">
+    <div class="fr-grid-row fr-grid-row--center">
+      <div class="fr-col-12 fr-col-md-8 fr-col-lg-6">
+        <div class="fr-modal__body">
+          <div class="fr-modal__header">
+            <button class="fr-btn--close fr-btn" aria-controls="modal-labyrinthe">Fermer</button>
+          </div>
+          <div class="fr-modal__content">
+            <p class="fr-badge fr-badge--green-emeraude fr-badge--no-icon fr-mb-2w">Démarche</p>
+            <h1 id="modal-labyrinthe-title" class="fr-modal__title">Le jeu de piste des guichets</h1>
+            <p>Le parcours compte sept guichets, dont trois virtuels, deux fermés le jour de votre visite et un qui ne traite que les dossiers d'un autre département.</p>
+            <p>Les lots, non attribués depuis 2011, comprennent un accusé de réception encadré et la possibilité (théorique) de recommencer le parcours depuis le début.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog aria-labelledby="modal-calendrier-title" id="modal-calendrier" class="fr-modal">
+  <div class="fr-container fr-container--fluid fr-container-md">
+    <div class="fr-grid-row fr-grid-row--center">
+      <div class="fr-col-12 fr-col-md-8 fr-col-lg-6">
+        <div class="fr-modal__body">
+          <div class="fr-modal__header">
+            <button class="fr-btn--close fr-btn" aria-controls="modal-calendrier">Fermer</button>
+          </div>
+          <div class="fr-modal__content">
+            <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon fr-mb-2w">Évènement</p>
+            <h1 id="modal-calendrier-title" class="fr-modal__title">La Journée du "je le ferai demain"</h1>
+            <p>Organisée chaque année à une date volontairement non communiquée, cette journée célèbre le report comme mode de gouvernance à part entière.</p>
+            <p>L'édition de cette année a battu son propre record : zéro dossier déposé, zéro plainte reçue, zéro bilan publié. Le Ministère y voit un cercle vertueux.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<dialog aria-labelledby="modal-trophee-title" id="modal-trophee" class="fr-modal">
+  <div class="fr-container fr-container--fluid fr-container-md">
+    <div class="fr-grid-row fr-grid-row--center">
+      <div class="fr-col-12 fr-col-md-8 fr-col-lg-6">
+        <div class="fr-modal__body">
+          <div class="fr-modal__header">
+            <button class="fr-btn--close fr-btn" aria-controls="modal-trophee">Fermer</button>
+          </div>
+          <div class="fr-modal__content">
+            <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon fr-mb-2w">Évènement</p>
+            <h1 id="modal-trophee-title" class="fr-modal__title">Le concours annuel de procrastination</h1>
+            <p>Le jury, composé de cinq membres, ne s'est réuni qu'une seule fois pour reporter sa propre réunion de délibération.</p>
+            <p>Le trophée, déjà gravé, attend son lauréat depuis trois éditions. Le règlement du concours, lui, n'a jamais été officiellement publié.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</dialog>
 
 <footer class="fr-footer" role="contentinfo" id="footer">
   <div class="fr-container">
     <div class="fr-footer__body">
       <div class="fr-footer__brand fr-enlarge-link">
-        <a href="#accueil" title="Retour à l'accueil — Ministère du Chômage">
+        <a href="index.html#accueil" title="Retour à l'accueil — Ministère du Chômage">
           <p class="fr-logo">République<br>Française</p>
         </a>
       </div>
