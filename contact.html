@@ -59,493 +59,67 @@
     </div>
   </div>
 </header>
-
 <section class="fr-hero" id="accueil">
-    <main
-    <section id="contacts">
-
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
-        * {
-            box-sizing: border-box;
-        }
-
-        #contacts {
-            max-width: 1800px;
-            margin: 0 auto;
-            padding: 60px 40px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .glass-container {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 48px;
-            box-shadow: 
-                0 32px 64px rgba(0, 0, 0, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-container:hover {
-            transform: translateY(-4px);
-            box-shadow: 
-                0 48px 80px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15);
-        }
-
-        #contacts h2 {
-            font-size: 3rem;
-            font-weight: 700;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #f5576c 75%, #4facfe 100%);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradientShift 8s ease-in-out infinite;
-            letter-spacing: -0.02em;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        #contacts p {
-            color: #3c3c3f;
-            margin-bottom: 40px;
-            font-size: 1.2rem;
-            font-weight: 400;
-            line-height: 1.6;
-        }
-
-        #contacts a {
-            color: #667eea;
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        #contacts a:hover {
-            color: #f093fb;
-        }
-
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            margin: 40px 0;
-            position: relative;
-        }
-
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 6px;
-            height: 6px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.5);
-        }
-
-        .form-group {
-            margin-bottom: 32px;
-            position: relative;
-        }
-
-        .input-wrapper {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .floating-label {
-            position: absolute;
-            top: 50%;
-            left: 20px;
-            transform: translateY(-50%);
-            color: #8585a0;
-            font-size: 16px;
-            font-weight: 500;
-            pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1;
-        }
-
-        .floating-label.active {
-            top: -8px;
-            left: 16px;
-            font-size: 12px;
-            font-weight: 600;
-            background: #0a0a0f;
-            padding: 0 8px;
-            color: #667eea;
-        }
-
-        input[type="text"], 
-        input[type="email"], 
-        textarea {
-            width: 100%;
-            padding: 20px;
-            border-radius: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            color: #ffffff;
-            font-size: 16px;
-            font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            z-index: 0;
-        }
-
-        input[type="text"]::placeholder,
-        input[type="email"]::placeholder,
-        textarea::placeholder {
-            color: transparent;
-        }
-
-        input[type="text"]:focus, 
-        input[type="email"]:focus, 
-        textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 
-                0 0 0 4px rgba(102, 126, 234, 0.1),
-                0 8px 32px rgba(102, 126, 234, 0.2);
-            transform: translateY(-2px);
-        }
-
-        textarea {
-            min-height: 140px;
-            resize: vertical;
-            font-family: inherit;
-        }
-
-        .textarea-wrapper .floating-label {
-            top: 28px;
-        }
-
-        .textarea-wrapper .floating-label.active {
-            top: -8px;
-        }
-
-        /* Bouton premium ultra-sophistiqué */
-        .button-container {
-            text-align: center;
-            margin: 48px 0 32px;
-        }
-
-        #sendbutton {
-            position: relative;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            border: none;
-            border-radius: 50px;
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            padding: 20px 48px;
-            cursor: pointer;
-            overflow: hidden;
-            text-transform: none;
-            letter-spacing: 0.5px;
-            min-width: 200px;
-            box-shadow: 
-                0 16px 32px rgba(102, 126, 234, 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            font-family: inherit;
-        }
-
-        #sendbutton::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        #sendbutton::after {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        #sendbutton:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: 
-                0 24px 48px rgba(102, 126, 234, 0.4),
-                0 0 0 1px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-        }
-
-        #sendbutton:hover::before {
-            left: 100%;
-        }
-
-        #sendbutton:hover::after {
-            width: 300px;
-            height: 300px;
-            opacity: 0;
-        }
-
-        #sendbutton:active {
-            transform: translateY(-3px) scale(0.98);
-            transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        #sendbutton:disabled {
-            background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-        }
-
-        /* Animation de chargement premium */
-        .loading-dots {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            margin-left: 8px;
-        }
-
-        .loading-dots span {
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            animation: loadingBounce 1.4s ease-in-out infinite both;
-        }
-
-        .loading-dots span:nth-child(1) { animation-delay: -0.32s; }
-        .loading-dots span:nth-child(2) { animation-delay: -0.16s; }
-
-        @keyframes loadingBounce {
-            0%, 80%, 100% { 
-                transform: scale(0.8);
-                opacity: 0.5;
-            }
-            40% { 
-                transform: scale(1.2);
-                opacity: 1;
-            }
-        }
-
-        /* Messages de résultat premium */
-        #result {
-            margin-top: 32px;
-            padding: 20px 24px;
-            border-radius: 16px;
-            font-weight: 500;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px) scale(0.95);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        #result.show {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        .success {
-            background: linear-gradient(135deg, rgba(34, 197, 94, 0.2) 0%, rgba(21, 128, 61, 0.2) 100%);
-            color: #bbf7d0;
-            border-color: rgba(34, 197, 94, 0.3);
-            box-shadow: 0 8px 32px rgba(34, 197, 94, 0.2);
-        }
-
-        .error {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(185, 28, 28, 0.2) 100%);
-            color: #fecaca;
-            border-color: rgba(239, 68, 68, 0.3);
-            box-shadow: 0 8px 32px rgba(239, 68, 68, 0.2);
-        }
-
-        /* Micro-interactions */
-        .form-group {
-            animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .form-group:nth-child(1) { animation-delay: 0.1s; }
-        .form-group:nth-child(2) { animation-delay: 0.2s; }
-        .form-group:nth-child(3) { animation-delay: 0.3s; }
-        .form-group:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive design premium */
-        @media (max-width: 768px) {
-            body {
-                padding: 16px;
-            }
-            
-            #contacts {
-                padding: 32px 16px;
-            }
-            
-            .glass-container {
-                padding: 32px 24px;
-                border-radius: 20px;
-            }
-            
-            #contacts h2 {
-                font-size: 2.5rem;
-            }
-            
-            #sendbutton {
-                width: 100%;
-                padding: 18px 32px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            #contacts h2 {
-                font-size: 2rem;
-            }
-            
-            .glass-container {
-                padding: 24px 20px;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <section id="contacts">
-        <div class="glass-container">
-            <h2>Me contacter par mail</h2>
-
-            <center> <p>Vous pouvez nous contactez par mail sur l'une des 2 adresses mail suivantes :</p></center>
-            <div id="liens" id="topL" style="text-align: center; border-radius: 110px;">
-                <nav>
-                    <ul>
-                        <li><a>scotty.verscheure@my-digital-school.org</a></li>
-                        <li><a>telio.desmet@my-digital-school.org</a></li>
-                    </ul>
-                    <br>
-                    <center><p>Vous pouvez aussi contactez notre établissement pour plus d'informations sur les activitées de chômeurs professionnels:</p></center>*
-                    <nav>
-                        <ul>
-                            <li><a>amelie.catteau@mydigitalschool.com</a></li>
-                    </nav>
-                </nav>
-
-                <br>
-            <p>Pour nous contactez, n'hésitez pas à utiliser cette messagerie intégrée !</p>
-            <div class="divider"></div>
-            
-            <form method="POST" id="form">
-                <input type="hidden" name="access_key" value="ddc9aeb6-a9c1-4b90-9bcf-4bf5d2a27a0b">
-                
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <label class="floating-label">Votre nom</label>
-                        <input type="text" name="name" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="input-wrapper">
-                        <label class="floating-label">Votre adresse mail</label>
-                        <input type="email" name="email" required>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <div class="input-wrapper textarea-wrapper">
-                        <label class="floating-label">Votre message</label>
-                        <textarea name="message" required></textarea>
-                    </div>
-                </div>
-                
-                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-                
-                <div class="button-container">
-                    <button id="sendbutton" type="submit">
-                        <span class="button-text">Envoyer le message</span>
-                    </button>
-                </div>
-                
-                <div id="result"></div>
-            </form>
+    <main>
+    <section id="contacts" class="fr-container fr-py-6w">
+      <div class="fr-grid-row fr-grid-row--center">
+        <div class="fr-col-12 fr-col-md-8">
+          <h2>Nous contacter</h2>
+          <p>Toujours décidé à nous contacter, n'hésitez pas à utiliser cette messagerie intégrée !</p>
+          <p class="fr-text--sm fr-text-mention--grey">(Vous n'aurez jamais de réponse mais, vous êtes chômeur, vous avez du temps à perdre !)</p>
+          <hr class="fr-mt-4w fr-mb-4w">
+ 
+          <form method="POST" id="form">
+            <input type="hidden" name="access_key" value="ddc9aeb6-a9c1-4b90-9bcf-4bf5d2a27a0b">
+ 
+            <div class="fr-input-group">
+              <label class="fr-label" for="name">Votre nom</label>
+              <input class="fr-input" type="text" id="name" name="name" required>
+            </div>
+ 
+            <div class="fr-input-group">
+              <label class="fr-label" for="email">Votre adresse mail</label>
+              <input class="fr-input" type="email" id="email" name="email" required>
+            </div>
+ 
+            <div class="fr-input-group">
+              <label class="fr-label" for="message">Votre message</label>
+              <textarea class="fr-input" id="message" name="message" rows="6" required></textarea>
+            </div>
+ 
+            <input type="checkbox" name="botcheck" class="fr-hidden" style="display: none;">
+ 
+            <div class="fr-mt-4w">
+              <button id="sendbutton" class="fr-btn" type="submit">
+                Envoyer le message
+              </button>
+            </div>
+ 
+            <div id="result" class="fr-mt-3w" role="status"></div>
+          </form>
         </div>
+      </div>
     </section>
-
+ 
     <script>
-        // Animation des labels flottants
-        function setupFloatingLabels() {
-            const inputs = document.querySelectorAll('input[type="text"], input[type="email"], textarea');
-            
-            inputs.forEach(input => {
-                const label = input.parentElement.querySelector('.floating-label');
-                
-                function checkInput() {
-                    if (input.value.trim() !== '' || input === document.activeElement) {
-                        label.classList.add('active');
-                    } else {
-                        label.classList.remove('active');
-                    }
-                }
-                
-                input.addEventListener('focus', () => label.classList.add('active'));
-                input.addEventListener('blur', checkInput);
-                input.addEventListener('input', checkInput);
-                
-                // Vérification initiale
-                checkInput();
-            });
-        }
-
-        // Gestion du formulaire avec animations premium
+        // Gestion du formulaire de contact
         function setupForm() {
             const form = document.getElementById('form');
             const result = document.getElementById('result');
             const sendButton = document.getElementById('sendbutton');
-            const buttonText = sendButton.querySelector('.button-text');
-
+ 
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                
-                // Animation du bouton premium
+ 
                 sendButton.disabled = true;
-                buttonText.innerHTML = 'Envoi en cours<div class="loading-dots"><span></span><span></span><span></span></div>';
-                
+                sendButton.textContent = 'Envoi en cours...';
+ 
                 const formData = new FormData(form);
                 const object = Object.fromEntries(formData);
                 const json = JSON.stringify(object);
-                
-                // Animation du message de statut
-                result.innerHTML = "⏳ Envoi du message  ;en cours...";
-                result.className = "";
-                result.classList.add('show');
-                
+ 
+                result.innerHTML = '<div class="fr-alert fr-alert--info fr-alert--sm"><p>Envoi du message en cours...</p></div>';
+ 
                 fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
                     headers: {
@@ -557,140 +131,32 @@
                 .then(async (response) => {
                     let json = await response.json();
                     if (response.status == 200) {
-                        result.innerHTML = "✨ Message envoyé avec succès ! Merci d'avoir utilisé cette messagerie.";
-                        result.className = "show success";
+                        result.innerHTML = '<div class="fr-alert fr-alert--success fr-alert--sm"><p>Message envoyé avec succès ! Merci d\'avoir utilisé cette messagerie.</p></div>';
                     } else {
                         console.log(response);
-                        result.innerHTML = "⚠️ " + json.message;
-                        result.className = "show error";
+                        result.innerHTML = '<div class="fr-alert fr-alert--error fr-alert--sm"><p>' + json.message + '</p></div>';
                     }
                 })
                 .catch(error => {
                     console.log(error);
-                    result.innerHTML = "🔄 Connexion interrompue. Veuillez réessayer dans un moment.";
-                    result.className = "show error";
+                    result.innerHTML = '<div class="fr-alert fr-alert--error fr-alert--sm"><p>Connexion interrompue. Veuillez réessayer dans un moment.</p></div>';
                 })
                 .then(function() {
-                    // Réinitialisation premium du bouton
-                    setTimeout(() => {
-                        sendButton.disabled = false;
-                        buttonText.textContent = 'Envoyer le message';
-                        
-                        if (result.classList.contains('success')) {
-                            form.reset();
-                            // Réinitialiser les labels flottants
-                            document.querySelectorAll('.floating-label').forEach(label => {
-                                label.classList.remove('active');
-                            });
-                        }
-                        
-                        setTimeout(() => {
-                            result.classList.remove('show');
-                            setTimeout(() => {
-                                result.innerHTML = "";
-                                result.className = "";
-                            }, 500);
-                        }, 4000);
-                    }, 1000);
+                    sendButton.disabled = false;
+                    sendButton.textContent = 'Envoyer le message';
+                    if (result.querySelector('.fr-alert--success')) {
+                        form.reset();
+                    }
                 });
             });
         }
-
+ 
         // Initialisation
         document.addEventListener('DOMContentLoaded', function() {
-            setupFloatingLabels();
             setupForm();
         });
     </script>
-        </section>
-  <br>
-      <section id="contact2">
-        <h2>Me contacter sur les réseaux sociaux</h2>
-        <p>Vous pouvez aussi me contacter sur les réseaux sociaux suivants :</p>
-        <div id="liens" id="topL" style="text-align: center; border-radius: 110px;">
-        <nav>
-          <ul>
-            <li><a href="https://www.linkedin.com/in/t%C3%A9lio-desmet-159604338/?isSelfProfile=true"><img src="icon logo/LinkedIn Logo - Colored - zonalogo.com.png" alt="LinkedIn"></a></li>
-            <li><a href="https://profile.indeed.com/?hl=fr_FR&co=FR&from=gnav-homepage"><img src="icon logo/toppng.com-indeed-logo-385x101.png" alt="Indeed"></a></li>
-            <li><a href="https://github.com/telio-desmet"><img src="icon logo/GitHub_Lockup_Black_Clearspace.png" alt="GitHub"></a></li>
-          </ul>
-        </nav>
-        </div>
-        </div>
-        <style>
-          #liens ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-          }
 
-          #liens li {
-            display: inline-block;
-          }
-
-          #liens img {
-            width: 180px;
-            height: 50px;
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
-          }
-
-          #liens img:hover {
-            transform: scale(1.2);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-          }
-        </style>
-      </section>
-
-      <br>
-
-        <br>
-
-      <section id="contact3">
-        <h2>Contacte d'un responsable</h2>
-        <p>Voici le numéro de téléphone :</p>
-        <nav>
-        <ul>
-        <li><a>✆ 06 74 80 33 19</a></li>
-        </ul>
-        </nav>
-      </section>
-      <style>
-        #contact3 ul {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        #contact3 li {
-            display: inline-block;
-        }
-
-        #contact3 a {
-            font-size: 1.5rem;
-            color: #667eea;
-            text-decoration: none;
-            transition: color 0.3s ease, transform 0.3s ease;
-        }
-
-        #contact3 a:hover {
-            color: #f093fb;
-            transform: scale(1.1);
-        }
-       </style>
-      <br>
-  </main>
-  </section>
-
-  <br>
-
-  <div class="fr-callout">
-    <h2 class="fr-callout__title">Une question ? Une démarche à ne pas faire ?</h2>
-    <p class="fr-callout__text">Nos guichets sont ouverts de jamais à jamais. Un agent ne vous recontactera sous aucun délai déterminé.</p>
-    <a class="fr-btn" href="#">Ne rien entreprendre</a>
   </div>
 </main>
 
