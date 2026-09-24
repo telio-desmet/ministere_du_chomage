@@ -9,63 +9,47 @@
 <link rel="icon" href="files/icon.ico" type="image/x-icon">
 <title>Ministère du Chômage — République Française</title>
 <link rel="stylesheet" href="CSS/style.css">
-
 <style>
-  .carousel {
-    position: relative;
-    margin-top: 1rem;
-  }
-
-  .carousel__piste {
+  #accueil ~ main.fr-container {
     display: flex;
-    gap: 1rem;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    padding-bottom: 0.5rem;
-    /* Masquer la barre de scroll tout en gardant le défilement tactile/souris */
-    scrollbar-width: none;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 3rem;
   }
-  .carousel__piste::-webkit-scrollbar {
-    display: none;
+  .doc-card {
+    border: 1px solid #dddddd;
+    border-left: 4px solid #000091;
+    border-radius: 4px;
+    background-color: #f6f6f6;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   }
-
-  .carousel__item {
-    flex: 0 0 85%;
-    scroll-snap-align: start;
+  .doc-card h3 {
+    margin-top: 0;
+    color: #000091;
   }
-  @media (min-width: 48em) {
-    .carousel__item { flex-basis: 45%; }
+  .doc-card p {
+    margin: 0 0 0.75rem 0;
   }
-  @media (min-width: 62em) {
-    .carousel__item { flex-basis: 31%; }
+  .doc-card p:last-of-type {
+    margin-bottom: 1.25rem;
   }
-
-  .carousel__controles {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 1rem;
+  .doc-card .fr-btn {
+    margin-top: 0.5rem;
   }
 
-  .carousel__dots {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 0.75rem;
-  }
-  .carousel__dot {
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background-color: var(--border-default-grey);
-    border: none;
-    padding: 0;
-    cursor: pointer;
-  }
-  .carousel__dot[aria-current="true"] {
-    background-color: var(--background-action-high-blue-france);
-  }
+  .poll-card { margin-bottom: 0; }
+  .poll-card fieldset { border: 0; padding: 0; margin: 0 0 1rem 0; }
+  .poll-card legend { font-weight: 600; margin-bottom: .75rem; }
+  .poll-opt { display: block; margin: .4rem 0; cursor: pointer; }
+  .poll-opt input { margin-right: .5rem; }
+  .poll-res { display: none; margin-top: 1rem; }
+  .poll-row { margin: .6rem 0; font-size: .9rem; }
+  .poll-bar { height: 10px; background: #e5e5e5; border-radius: 5px; overflow: hidden; margin-top: .2rem; }
+  .poll-bar span { display: block; height: 100%; background: #000091; width: 0; transition: width .6s ease; }
+  .poll-total { font-size: .8rem; color: #666; margin-top: .75rem; }
+  .poll-note { font-style: italic; font-size: .85rem; }
 </style>
 </head>
 <body>
@@ -107,23 +91,22 @@
       <div class="fr-header__menu-links"></div>
       <nav class="fr-nav" id="navigation-principale" role="navigation" aria-label="Menu principal">
         <ul class="fr-nav__list">
-          <li class="fr-nav__item"><a class="fr-nav__link" href="index.html" aria-current="page">Accueil</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="index.html">Accueil</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="documents.html">Démarches administratives</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="activitees.html">Carte des activitées</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="actu.html">Actualités</a></li>
-          <li class="fr-nav__item"><a class="fr-nav__link" href="faq.html">F.A.Q</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="faq.html" aria-current="page">F.A.Q</a></li>
           <li class="fr-nav__item"><a class="fr-nav__link" href="contact.html">Ni rendez-vous ni contact</a></li>
         </ul>
       </nav>
     </div>
   </div>
 </header>
-
 <section class="fr-hero" id="accueil">
   <div class="fr-hero__inner">
     <div>
-      <h1>Bienvenue au Ministère du Chômage</h1>
-      <p class="lede">Notre mission (Parodique bien sur) : vous accompagner à ne surtout rien faire, avec le même sérieux administratif que n'importe quel autre ministère. Formulaires en trois exemplaires, jargon incompréhensible et délais de traitement infinis inclus.</p>
+      <h1>Foire Aux Questions</h1>
+      <p class="lede">Bien-sûr, face à un tel ministère, il n'y a que des questions à poser.</p>
     </div>
     <div class="fr-hero__badge">
       <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
@@ -138,277 +121,83 @@
   </div>
 </section>
 
-
-
-
 <main class="fr-container">
-  <section id="actus" aria-labelledby="actus-title" class="fr-mt-6w">
-    <h2 id="actus-title">Actualités</h2>
 
-    <div class="carousel" aria-roledescription="carousel" aria-label="Actualités">
-      <div class="carousel__piste" id="carousel-piste" tabindex="0">
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="1 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Le Ministère du Chômage lance une nouvelle initiative pour encourager l'inaction.</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="2 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--green-emeraude fr-badge--no-icon">Démarche</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Découvrez nos nouvelles procédures administratives pour maximiser votre temps libre.</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="3 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon">Évènement</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Participez à notre concours annuel de procrastination et gagnez des prix incroyables !</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="4 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--yellow-tournesol fr-badge--no-icon">Statistiques</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Le taux d'attente moyen aux guichets atteint un nouveau record historique.</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="5 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--orange-terre-battue fr-badge--no-icon">Alerte</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Un formulaire Cerfa aurait été rempli intégralement : les experts restent sceptiques.</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="6 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--blue-cumulus fr-badge--no-icon">Communiqué</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Nouveau service en ligne : la demande de rendez-vous pour prendre un autre rendez-vous.</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="7 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--pink-macaron fr-badge--no-icon">Portrait</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Il n'a rien fait depuis 1998 : rencontre avec le fonctionnaire le plus décoré du ministère.</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="8 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--green-menthe fr-badge--no-icon">Démarche</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Simplification administrative : le dossier passe de 12 à 11 pages (une victoire).</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="9 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--brown-opera fr-badge--no-icon">Évènement</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Journée portes fermées : venez ne rien visiter dans nos locaux inaccessibles.</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="10 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--beige-gris-galet fr-badge--no-icon">Statistiques</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Le standard téléphonique a établi un nouveau record de musique d'attente ininterrompue.</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="11 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon">Alerte</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Un usager aurait reçu une réponse à son courrier envoyé en 2019.</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="12 sur 12">
-          <div class="fr-card fr-enlarge-link">
-            <div class="fr-card__body">
-              <div class="fr-card__content">
-                <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué</p>
-                <h3 class="fr-card__title">
-                  <a href="#">Le ministère annonce ne rien annoncer avant nouvel ordre.</a>
-                </h3>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <div class="carousel__controles">
-        <button class="fr-btn fr-btn--secondary fr-icon-arrow-left-s-line" id="carousel-prev" type="button" aria-label="Actualité précédente"></button>
-        <button class="fr-btn fr-btn--secondary fr-icon-arrow-right-s-line" id="carousel-next" type="button" aria-label="Actualité suivante"></button>
-      </div>
-
-      <div class="carousel__dots" id="carousel-dots"></div>
-    </div>
-  </section>
-
-  <br>
-
-  <div class="fr-callout">
-    <h2 class="fr-callout__title">Une question ? Une démarche à ne pas faire ?</h2>
-    <p class="fr-callout__text">Nos guichets sont ouverts de jamais à jamais. Un agent ne vous recontactera sous aucun délai déterminé.</p>
-    <a class="fr-btn" href="#">Ne rien entreprendre</a>
+  <div id="doc1" class="doc-card">
+    <h3>Foire Aux Questions</h3>
+    <p>Bien sûr, ce site web est parodique et n'a rien à voir avec quelconque démarches réelles.</p>
+    <p>Si vous êtes chomeur, veuillez vous référer à <a href="https://www.francetravail.fr/accueil/?index=0">France Travail</a> pour trouver les démarches administratives et autres aides qui vous intéressent.</p>
+    <p>Il est évidemment important de prendre ses recherches d'emploi au serieux afin de ne pas demeurer au chômage.</p>
+    <p>De plus, il ne faut pas utiliser ce site web pour faire de la démarche administrative.</p>
+    <p>Ce site web est à prendre au second degré, veuillez ne pas entrer d'informations sensibles, personnelles ou confidentielles.</p>
+    <p>Merci de votre compréhension.</p>
+    <p>Le Ministre du Chômage</p>
   </div>
+
+
+  <div class="doc-card">
+    <h3>Sondages officiels</h3>
+    <p>Le Ministère consulte régulièrement ses administrés afin de ne tenir aucun compte de leur avis. Les résultats sont certifiés sincères, définitifs et sans conséquence.</p>
+    <p class="poll-note">Les votes sont enregistrés uniquement dans votre navigateur, le temps de la page. Aucune donnée n'est collectée.</p>
+  </div>
+  <div id="polls" style="display:flex;flex-direction:column;gap:2rem;"></div>
+
 </main>
 
-<footer class="fr-footer" role="contentinfo" id="footer">
-  <div class="fr-container">
-    <div class="fr-footer__body">
-      <div class="fr-footer__brand fr-enlarge-link">
-        <a href="#accueil" title="Retour à l'accueil — Ministère du Chômage">
-          <p class="fr-logo">République<br>Française</p>
-        </a>
-      </div>
-      <div class="fr-footer__content">
-        <p class="fr-footer__content-desc">Ministère du Chômage — site parodique, aucune démarche réelle n'est possible ici.</p>
-        <ul class="fr-footer__content-list">
-          <li class="fr-footer__content-item"><a class="fr-footer__content-link" href="#">Organigramme fantôme</a></li>
-          <li class="fr-footer__content-item"><a class="fr-footer__content-link" href="#">Formulaire Cerfa n°00000</a></li>
-          <li class="fr-footer__content-item"><a class="fr-footer__content-link" href="#">Foire aux excuses</a></li>
-          <li class="fr-footer__content-item"><a class="fr-footer__content-link" href="#">Statistiques introuvables</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="fr-footer__bottom">
-      <ul class="fr-footer__bottom-list">
-        <li class="fr-footer__bottom-item"><a class="fr-footer__bottom-link" href="#">Plan du site (vide)</a></li>
-        <li class="fr-footer__bottom-item"><a class="fr-footer__bottom-link" href="#">Accessibilité : non conforme</a></li>
-        <li class="fr-footer__bottom-item"><a class="fr-footer__bottom-link" href="#">Mentions inutiles</a></li>
-      </ul>
-      <div class="fr-footer__bottom-copy">
-        <p>© République Française — Ministère du Chômage.</p>
-      </div>
-    </div>
-  </div>
-</footer>
-
 <script>
-  const piste = document.getElementById('carousel-piste');
-  const items = Array.from(piste.querySelectorAll('.carousel__item'));
-  const boutonPrev = document.getElementById('carousel-prev');
-  const boutonNext = document.getElementById('carousel-next');
-  const dotsBox = document.getElementById('carousel-dots');
-
-  // Génération des points de navigation (un par actualité)
-  items.forEach((item, index) => {
-    const dot = document.createElement('button');
-    dot.className = 'carousel__dot';
-    dot.type = 'button';
-    dot.setAttribute('aria-label', "Aller à l'actualité " + (index + 1));
-    dot.addEventListener('click', () => {
-      items[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+(function () {
+  var POLLS = [
+    { q: "Qui est le meilleur chômeur de France ?",
+      o: [["Gérard, 47 ans, 12 ans d'ancienneté et toujours aussi motivé", 412], ["Kevin, champion régional de la sieste stratégique", 388], ["Mireille, qui répond à tous les courriels de France Travail dans l'heure", 97], ["Le Ministre du Chômage lui-même (hors concours)", 203], ["Moi, évidemment", 526]] },
+    { q: "Pourquoi mon dossier n'a-t-il toujours pas été traité ?",
+      o: [["Il est en cours d'instruction depuis 2019", 341], ["Le tampon est en congés", 289], ["Il a été égaré lors de la réorganisation du bureau", 154], ["Quel dossier ?", 267]] },
+    { q: "Comment obtenir un rendez-vous avec le Ministère ?",
+      o: [["En appelant le numéro qui n'existe pas", 305], ["En envoyant un courrier à l'adresse du Ministère (introuvable)", 178], ["En attendant qu'on me contacte", 144], ["Voir la page « Ni rendez-vous ni contact »", 396]] },
+    { q: "Faut-il vraiment chercher un emploi pour ne plus être au chômage ?",
+      o: [["Quelle idée saugrenue", 233], ["Oui, mais après la sieste", 361], ["Ça se saurait", 187], ["Question à poser au Ministre (voir rendez-vous)", 142]] },
+    { q: "À quoi sert exactement le Ministère du Chômage ?",
+      o: [["À rien, mais avec méthode", 422], ["À ministrer le chômage, il est là pour ça", 158], ["À faire un site web pour un TP", 274], ["À justifier ma pause café", 219]] },
+    { q: "Quelle est la durée réglementaire d'une pause café administrative ?",
+      o: [["15 minutes (renouvelable jusqu'au déjeuner)", 267], ["Le temps que la machine finisse de chauffer", 318], ["Indéterminée, sur avis du Ministre", 121], ["Jusqu'au prochain quinquennat", 84]] },
+    { q: "Le Ministre du Chômage est-il lui-même au chômage ?",
+      o: [["Oui, et il en est très fier", 356], ["Non, il est en télétravail permanent", 148], ["Il est en cours d'instruction", 203], ["Secret d'État", 171]] },
+    { q: "Quel formulaire faut-il remplir pour remplir un formulaire ?",
+      o: [["Le Cerfa 0/0, disponible nulle part", 289], ["Le Cerfa 1/0, en attente de signature du Cerfa 0/0", 195], ["Aucun, c'est un formulaire de bienvenue", 92], ["Le formulaire de réclamation (voir Cerfa 0/0)", 231]] }
+  ];
+  var root = document.getElementById("polls");
+  POLLS.forEach(function (p, i) {
+    var card = document.createElement("div");
+    card.className = "doc-card poll-card";
+    var h = '<fieldset><legend>' + p.q + '</legend>';
+    p.o.forEach(function (o, j) {
+      h += '<label class="poll-opt"><input type="radio" name="poll' + i + '" value="' + j + '">' + o[0] + '</label>';
     });
-    dotsBox.appendChild(dot);
+    h += '</fieldset><button type="button" class="fr-btn fr-btn--sm">Voter</button>' +
+         '<div class="poll-res" aria-live="polite"></div>';
+    card.innerHTML = h;
+    root.appendChild(card);
+    var btn = card.querySelector("button"), res = card.querySelector(".poll-res");
+    btn.addEventListener("click", function () {
+      var sel = card.querySelector("input:checked");
+      if (!sel) { res.style.display = "block"; res.textContent = "Veuillez choisir une réponse. À défaut, un formulaire Cerfa 0/0 vous sera envoyé (jamais)."; return; }
+      var counts = p.o.map(function (o) { return o[1]; });
+      counts[+sel.value] += 1;
+      var total = counts.reduce(function (a, b) { return a + b; }, 0);
+      var r = "";
+      p.o.forEach(function (o, j) {
+        var pct = Math.round(counts[j] / total * 100);
+        r += '<div class="poll-row">' + o[0] + ' — <strong>' + pct + ' %</strong><div class="poll-bar"><span data-w="' + pct + '"></span></div></div>';
+      });
+      r += '<div class="poll-total">' + total + ' votes · Votre voix a bien été enregistrée, puis égarée. Merci.</div>';
+      res.innerHTML = r; res.style.display = "block";
+      card.querySelectorAll("input").forEach(function (x) { x.disabled = true; });
+      btn.disabled = true;
+      requestAnimationFrame(function () {
+        res.querySelectorAll(".poll-bar span").forEach(function (s) { s.style.width = s.dataset.w + "%"; });
+      });
+    });
   });
-  const dots = Array.from(dotsBox.querySelectorAll('.carousel__dot'));
-
-  function indexVisible() {
-    const pisteRect = piste.getBoundingClientRect();
-    let plusProche = 0;
-    let distanceMin = Infinity;
-    items.forEach((item, index) => {
-      const distance = Math.abs(item.getBoundingClientRect().left - pisteRect.left);
-      if (distance < distanceMin) {
-        distanceMin = distance;
-        plusProche = index;
-      }
-    });
-    return plusProche;
-  }
-
-  function majDots() {
-    const actif = indexVisible();
-    dots.forEach((dot, index) => {
-      dot.setAttribute('aria-current', index === actif ? 'true' : 'false');
-    });
-  }
-
-  function defiler(sens) {
-    const largeurItem = items[0].getBoundingClientRect().width + 16; // 16px = gap
-    piste.scrollBy({ left: sens * largeurItem, behavior: 'smooth' });
-  }
-
-  boutonPrev.addEventListener('click', () => defiler(-1));
-  boutonNext.addEventListener('click', () => defiler(1));
-  piste.addEventListener('scroll', () => {
-    window.requestAnimationFrame(majDots);
-  });
-
-  majDots();
+})();
 </script>
-
 </body>
 </html>
