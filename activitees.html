@@ -15,10 +15,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 
 <style>
-  /* Réglages propres à cette page uniquement (la mise en page vient du DSFR) */
-  .fr-alert--geoloc {
-    margin-bottom: 1.5rem;
-  }
+  .fr-alert--geoloc { margin-bottom: 1.5rem; }
 
   .carte-layout {
     display: grid;
@@ -26,18 +23,11 @@
     gap: 1.5rem;
     align-items: start;
   }
-
   @media (max-width: 62em) {
-    .carte-layout {
-      grid-template-columns: 1fr;
-    }
+    .carte-layout { grid-template-columns: 1fr; }
   }
 
-  #map {
-    height: 480px;
-    width: 100%;
-    border: 1px solid var(--border-default-grey);
-  }
+  #map { height: 480px; width: 100%; border: 1px solid var(--border-default-grey); }
 
   .liste-villes {
     border: 1px solid var(--border-default-grey);
@@ -45,30 +35,23 @@
     padding: 1rem;
     background-color: var(--background-default-grey);
   }
+  .liste-villes h2 { font-size: 1rem; margin-bottom: 0.75rem; }
 
-  .liste-villes h2 {
-    font-size: 1rem;
-    margin-bottom: 0.75rem;
-  }
+  #activites-ville { margin-top: 1.5rem; }
+  #activites-ville ul { list-style: none; padding: 0; margin: 0; }
+  #activites-ville li { padding: 0.5rem 0; border-bottom: 1px solid var(--border-default-grey); }
+  #activites-ville li:last-child { border-bottom: none; }
 
-  #activites-ville {
+  .bloc-lieux {
     margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-default-grey);
   }
+  .bloc-lieux h2 { font-size: 1rem; margin-bottom: 0.75rem; }
+  .bloc-lieux .fr-checkbox-group { margin-bottom: 0.5rem; }
+  #lieux-statut { font-size: 0.875rem; margin-top: 0.5rem; }
 
-  #activites-ville ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  #activites-ville li {
-    padding: 0.5rem 0;
-    border-bottom: 1px solid var(--border-default-grey);
-  }
-
-  #activites-ville li:last-child {
-    border-bottom: none;
-  }
+  .legende-lieu { display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 50%; margin-right: 0.4rem; }
 </style>
 </head>
 
@@ -168,6 +151,40 @@
           <h3 id="activites-titre">Activités</h3>
           <ul id="activites-liste"></ul>
         </div>
+
+        <div class="bloc-lieux">
+          <h2>Lieux à proximité</h2>
+
+          <div class="fr-checkbox-group">
+            <input type="checkbox" id="lieu-bar" checked>
+            <label class="fr-label" for="lieu-bar"><span class="legende-lieu" style="background:#e1000f"></span>Bars</label>
+          </div>
+          <div class="fr-checkbox-group">
+            <input type="checkbox" id="lieu-cafe" checked>
+            <label class="fr-label" for="lieu-cafe"><span class="legende-lieu" style="background:#8b572a"></span>Cafés</label>
+          </div>
+          <div class="fr-checkbox-group">
+            <input type="checkbox" id="lieu-jeux" checked>
+            <label class="fr-label" for="lieu-jeux"><span class="legende-lieu" style="background:#6a4c93"></span>Magasins de jeux / TCG</label>
+          </div>
+          <div class="fr-checkbox-group">
+            <input type="checkbox" id="lieu-cinema" checked>
+            <label class="fr-label" for="lieu-cinema"><span class="legende-lieu" style="background:#000091"></span>Cinémas</label>
+          </div>
+
+          <div class="fr-select-group fr-mt-2w">
+            <label class="fr-label" for="rayon-recherche">Rayon de recherche</label>
+            <select class="fr-select" id="rayon-recherche">
+              <option value="1000">1 km</option>
+              <option value="2000" selected>2 km</option>
+              <option value="5000">5 km</option>
+            </select>
+          </div>
+
+          <button class="fr-btn fr-mt-2w" id="bouton-lieux" type="button">Rechercher autour de la carte</button>
+
+          <p id="lieux-statut" class="fr-hint-text"></p>
+        </div>
       </div>
 
       <div id="map"></div>
@@ -214,7 +231,7 @@
 <!-- Leaflet -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-<!-- DSFR JS (nécessaire pour les composants interactifs comme le menu et les alertes) -->
+<!-- DSFR JS -->
 <script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.module.min.js"></script>
 <script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.nomodule.min.js"></script>
 
@@ -242,86 +259,38 @@
 
   // --- Villes et activités associées ---
   const villes = [
-    {
-      nom: "Paris",
-      coords: [48.8566, 2.3522],
-      zoom: 13,
-      activites: [
-        "Atelier « Regarder les offres d'emploi sans postuler »",
-        "Réunion d'information sur la salle d'attente",
-        "Simulation d'entretien avec un miroir"
-      ]
-    },
-    {
-      nom: "Lyon",
-      coords: [45.7640, 4.8357],
-      zoom: 13,
-      activites: [
-        "Café-débat « Pourquoi travailler un lundi ? »",
-        "Atelier CV : la police Comic Sans est-elle un frein ?",
-        "Marche collective jusqu'au guichet fermé"
-      ]
-    },
-    {
-      nom: "Marseille",
-      coords: [43.2965, 5.3698],
-      zoom: 13,
-      activites: [
-        "Séminaire « L'art de la relance téléphonique infinie »",
-        "Pique-nique devant le pôle emploi",
-        "Atelier photocopie de justificatifs (durée illimitée)"
-      ]
-    },
-    {
-      nom: "Toulouse",
-      coords: [43.6047, 1.4442],
-      zoom: 13,
-      activites: [
-        "Conférence « Le formulaire Cerfa, entre mythe et réalité »",
-        "Groupe de parole : accepter le statu quo",
-        "Atelier lecture d'annonces sans postuler"
-      ]
-    },
-    {
-      nom: "Lille",
-      coords: [50.6292, 3.0573],
-      zoom: 13,
-      activites: [
-        "Rencontre « Un jour, peut-être, un entretien »",
-        "Atelier rédaction de lettres jamais envoyées",
-        "Stand café pour faire passer le temps"
-      ]
-    },
-    {
-      nom: "Bordeaux",
-      coords: [44.8378, -0.5792],
-      zoom: 13,
-      activites: [
-        "Visite guidée du bâtiment sans les bureaux ouverts",
-        "Atelier « Patienter avec le sourire »",
-        "Dégustation de café d'attente"
-      ]
-    },
-    {
-      nom: "Nantes",
-      coords: [47.2184, -1.5536],
-      zoom: 13,
-      activites: [
-        "Atelier « Remplir le même dossier deux fois »",
-        "Réunion sur la file d'attente virtuelle",
-        "Groupe de soutien anti-motivation"
-      ]
-    },
-    {
-      nom: "Strasbourg",
-      coords: [48.5734, 7.7521],
-      zoom: 13,
-      activites: [
-        "Conférence transfrontalière sur l'inactivité",
-        "Atelier traduction de formulaires incompréhensibles",
-        "Marche silencieuse jusqu'à l'accueil"
-      ]
-    }
+    { nom: "Paris", coords: [48.8566, 2.3522], zoom: 13, activites: [
+      "Atelier « Regarder les offres d'emploi sans postuler »",
+      "Réunion d'information sur la salle d'attente",
+      "Simulation d'entretien avec un miroir" ] },
+    { nom: "Lyon", coords: [45.7640, 4.8357], zoom: 13, activites: [
+      "Café-débat « Pourquoi travailler un lundi ? »",
+      "Atelier CV : la police Comic Sans est-elle un frein ?",
+      "Marche collective jusqu'au guichet fermé" ] },
+    { nom: "Marseille", coords: [43.2965, 5.3698], zoom: 13, activites: [
+      "Séminaire « L'art de la relance téléphonique infinie »",
+      "Pique-nique devant le pôle emploi",
+      "Atelier photocopie de justificatifs (durée illimitée)" ] },
+    { nom: "Toulouse", coords: [43.6047, 1.4442], zoom: 13, activites: [
+      "Conférence « Le formulaire Cerfa, entre mythe et réalité »",
+      "Groupe de parole : accepter le statu quo",
+      "Atelier lecture d'annonces sans postuler" ] },
+    { nom: "Lille", coords: [50.6292, 3.0573], zoom: 13, activites: [
+      "Rencontre « Un jour, peut-être, un entretien »",
+      "Atelier rédaction de lettres jamais envoyées",
+      "Stand café pour faire passer le temps" ] },
+    { nom: "Bordeaux", coords: [44.8378, -0.5792], zoom: 13, activites: [
+      "Visite guidée du bâtiment sans les bureaux ouverts",
+      "Atelier « Patienter avec le sourire »",
+      "Dégustation de café d'attente" ] },
+    { nom: "Nantes", coords: [47.2184, -1.5536], zoom: 13, activites: [
+      "Atelier « Remplir le même dossier deux fois »",
+      "Réunion sur la file d'attente virtuelle",
+      "Groupe de soutien anti-motivation" ] },
+    { nom: "Strasbourg", coords: [48.5734, 7.7521], zoom: 13, activites: [
+      "Conférence transfrontalière sur l'inactivité",
+      "Atelier traduction de formulaires incompréhensibles",
+      "Marche silencieuse jusqu'à l'accueil" ] }
   ];
 
   const selectVille = document.getElementById('select-ville');
@@ -331,7 +300,6 @@
 
   let markerVille = null;
 
-  // Remplissage du menu déroulant
   villes.forEach((ville, index) => {
     const option = document.createElement('option');
     option.value = index;
@@ -342,12 +310,8 @@
   function afficherVille(ville) {
     map.setView(ville.coords, ville.zoom);
 
-    if (markerVille) {
-      map.removeLayer(markerVille);
-    }
-    markerVille = L.marker(ville.coords).addTo(map)
-      .bindPopup(ville.nom)
-      .openPopup();
+    if (markerVille) map.removeLayer(markerVille);
+    markerVille = L.marker(ville.coords).addTo(map).bindPopup(ville.nom).openPopup();
 
     activitesTitre.textContent = "Activités autour de " + ville.nom;
     activitesListe.innerHTML = "";
@@ -359,6 +323,7 @@
     activitesBox.hidden = false;
 
     showAlert('info', ville.nom, "Carte centrée sur " + ville.nom + ".");
+    rechercherLieux();
   }
 
   selectVille.addEventListener('change', (event) => {
@@ -370,9 +335,7 @@
   // --- Géolocalisation ---
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-      enableHighAccuracy: true,
-      timeout: 10000,
-      maximumAge: 0
+      enableHighAccuracy: true, timeout: 10000, maximumAge: 0
     });
   } else {
     showAlert('warning', 'Géolocalisation indisponible', "Votre navigateur ne prend pas en charge la géolocalisation.");
@@ -381,10 +344,9 @@
   function successCallback(position) {
     const { latitude, longitude } = position.coords;
     map.setView([latitude, longitude], 15);
-    L.marker([latitude, longitude]).addTo(map)
-      .bindPopup('Vous êtes ici')
-      .openPopup();
+    L.marker([latitude, longitude]).addTo(map).bindPopup('Vous êtes ici').openPopup();
     showAlert('success', 'Position trouvée', "Carte centrée sur votre position actuelle.");
+    rechercherLieux();
   }
 
   function errorCallback(error) {
@@ -395,6 +357,97 @@
     };
     showAlert('warning', 'Géolocalisation refusée ou indisponible', messages[error.code] || error.message);
   }
+
+  // --- Recherche de lieux réels (bars, cafés, magasins de jeux/TCG, cinémas) via Overpass API (OpenStreetMap) ---
+  const categoriesLieux = {
+    bar:    { label: "Bar",                couleur: "#e1000f", filtre: 'node["amenity"="bar"](around:RAYON,LAT,LON);' },
+    cafe:   { label: "Café",               couleur: "#8b572a", filtre: 'node["amenity"="cafe"](around:RAYON,LAT,LON);' },
+    jeux:   { label: "Magasin de jeux/TCG", couleur: "#6a4c93", filtre: 'node["shop"~"games|hobby"](around:RAYON,LAT,LON);' },
+    cinema: { label: "Cinéma",             couleur: "#000091", filtre: 'node["amenity"="cinema"](around:RAYON,LAT,LON);' }
+  };
+
+  const coucheLieux = L.layerGroup().addTo(map);
+  const statutLieux = document.getElementById('lieux-statut');
+  const boutonLieux = document.getElementById('bouton-lieux');
+  const selectRayon = document.getElementById('rayon-recherche');
+
+  const cases = {
+    bar: document.getElementById('lieu-bar'),
+    cafe: document.getElementById('lieu-cafe'),
+    jeux: document.getElementById('lieu-jeux'),
+    cinema: document.getElementById('lieu-cinema')
+  };
+
+  function pastilleIcone(couleur) {
+    return L.divIcon({
+      className: '',
+      html: `<div style="background:${couleur};width:14px;height:14px;border-radius:50%;border:2px solid white;box-shadow:0 0 2px rgba(0,0,0,0.6);"></div>`,
+      iconSize: [14, 14],
+      iconAnchor: [7, 7]
+    });
+  }
+
+  async function rechercherLieux() {
+    const centre = map.getCenter();
+    const rayon = selectRayon.value;
+    const typesActifs = Object.keys(cases).filter(cle => cases[cle].checked);
+
+    if (typesActifs.length === 0) {
+      coucheLieux.clearLayers();
+      statutLieux.textContent = "Aucune catégorie sélectionnée.";
+      return;
+    }
+
+    statutLieux.textContent = "Recherche en cours...";
+    boutonLieux.disabled = true;
+
+    const requetes = typesActifs.map(cle =>
+      categoriesLieux[cle].filtre
+        .replace('RAYON', rayon)
+        .replace('LAT', centre.lat)
+        .replace('LON', centre.lng)
+    ).join('\n');
+
+    const requeteOverpass = `[out:json][timeout:25];(${requetes});out center;`;
+
+    try {
+      const reponse = await fetch('https://overpass-api.de/api/interpreter', {
+        method: 'POST',
+        body: requeteOverpass
+      });
+      if (!reponse.ok) throw new Error("Réponse Overpass invalide (" + reponse.status + ")");
+      const donnees = await reponse.json();
+
+      coucheLieux.clearLayers();
+
+      donnees.elements.forEach(element => {
+        const tags = element.tags || {};
+        let cle = 'bar';
+        if (tags.amenity === 'cafe') cle = 'cafe';
+        else if (tags.amenity === 'cinema') cle = 'cinema';
+        else if (tags.shop === 'games' || tags.shop === 'hobby') cle = 'jeux';
+        else if (tags.amenity === 'bar') cle = 'bar';
+
+        const nom = tags.name || categoriesLieux[cle].label + " (sans nom)";
+        const marqueur = L.marker([element.lat, element.lon], { icon: pastilleIcone(categoriesLieux[cle].couleur) });
+        marqueur.bindPopup(`<strong>${nom}</strong><br>${categoriesLieux[cle].label}`);
+        coucheLieux.addLayer(marqueur);
+      });
+
+      statutLieux.textContent = donnees.elements.length + " lieu(x) trouvé(s) dans un rayon de " + (rayon / 1000) + " km.";
+    } catch (erreur) {
+      statutLieux.textContent = "Erreur lors de la recherche de lieux. Réessayez dans un instant.";
+      console.error(erreur);
+    } finally {
+      boutonLieux.disabled = false;
+    }
+  }
+
+  boutonLieux.addEventListener('click', rechercherLieux);
+  Object.values(cases).forEach(caseA => caseA.addEventListener('change', rechercherLieux));
+
+  // Première recherche automatique autour de Paris au chargement
+  rechercherLieux();
 </script>
 
 </body>
