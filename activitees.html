@@ -27,7 +27,7 @@
     .carte-layout { grid-template-columns: 1fr; }
   }
 
-  #map { height: 580px; width: 100%; border: 1px solid var(--border-default-grey); }
+  #map { height: 480px; width: 100%; border: 1px solid var(--border-default-grey); }
 
   .liste-villes {
     border: 1px solid var(--border-default-grey);
@@ -52,40 +52,6 @@
   #lieux-statut { font-size: 0.875rem; margin-top: 0.5rem; }
 
   .legende-lieu { display: inline-block; width: 0.75rem; height: 0.75rem; border-radius: 50%; margin-right: 0.4rem; }
-
-  .fr-search-ville { position: relative; margin-bottom: 1rem; }
-  .liste-suggestions-ville {
-    position: absolute;
-    z-index: 1000;
-    top: 100%;
-    left: 0;
-    right: 0;
-    margin: 0;
-    padding: 0.25rem 0;
-    list-style: none;
-    background: var(--background-default-grey, #fff);
-    border: 1px solid var(--border-default-grey, #ddd);
-    border-top: none;
-    max-height: 220px;
-    overflow-y: auto;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  }
-  .liste-suggestions-ville li {
-    padding: 0.5rem 0.75rem;
-    cursor: pointer;
-  }
-  .liste-suggestions-ville li:hover,
-  .liste-suggestions-ville li.active {
-    background: var(--background-alt-blue-france, #e8edff);
-  }
-  .liste-suggestions-ville li .suggestion-souligne {
-    font-weight: 700;
-  }
-  .liste-suggestions-ville .aucun-resultat {
-    padding: 0.5rem 0.75rem;
-    color: var(--text-mention-grey, #666);
-    cursor: default;
-  }
 </style>
 </head>
 
@@ -162,7 +128,7 @@
 
     <h1>Votre position</h1>
     <p class="fr-text--lead">
-      Cette page utilise votre position pour vous montrer les services les plus proches, ou recherchez n'importe quelle commune de France dans le champ ci-dessous.
+      Cette page utilise votre position pour vous montrer les services les plus proches, ou choisissez une ville dans la liste.
     </p>
 
     <div id="geoloc-alert" class="fr-alert fr-alert--info fr-alert--geoloc" hidden>
@@ -174,20 +140,11 @@
       <div class="liste-villes">
         <h2 id="select-ville-label">Choisir une ville</h2>
 
-        <div class="fr-search-bar fr-search-ville" role="search">
-          <label class="fr-label" for="recherche-ville">Ville</label>
-          <input
-            class="fr-input"
-            type="text"
-            id="recherche-ville"
-            role="combobox"
-            aria-expanded="false"
-            aria-controls="liste-suggestions-ville"
-            aria-autocomplete="list"
-            autocomplete="off"
-            placeholder="Tapez le nom d'une commune (ex : Valenciennes)..."
-          >
-          <ul id="liste-suggestions-ville" class="liste-suggestions-ville" role="listbox" hidden></ul>
+        <div class="fr-select-group">
+          <label class="fr-label" for="select-ville">Ville</label>
+          <select class="fr-select" id="select-ville" aria-labelledby="select-ville-label">
+            <option value="" selected disabled>-- Sélectionnez une ville --</option>
+          </select>
         </div>
 
         <div id="activites-ville" hidden>
@@ -218,9 +175,9 @@
           <div class="fr-select-group fr-mt-2w">
             <label class="fr-label" for="rayon-recherche">Rayon de recherche</label>
             <select class="fr-select" id="rayon-recherche">
-              <option value="1000">1 km</option>
-              <option value="2000" selected>2 km</option>
-              <option value="5000">5 km</option>
+              <option value="5000" selected>5 km</option>
+              <option value="20000">20 km</option>
+              <option value="50000">50 km</option>
             </select>
           </div>
 
@@ -300,191 +257,54 @@
     alertText.textContent = text;
   }
 
-  // --- Recherche de communes via l'API Géo (api.gouv.fr) : couvre toutes les communes de France ---
-  const rechercheVille = document.getElementById('recherche-ville');
-  const listeSuggestions = document.getElementById('liste-suggestions-ville');
+  // --- Villes et activités associées ---
+  const villes = [
+    { nom: "Paris", coords: [48.8566, 2.3522], zoom: 13, activites: [
+      "Atelier « Regarder les offres d'emploi sans postuler »",
+      "Réunion d'information sur la salle d'attente",
+      "Simulation d'entretien avec un miroir" ] },
+    { nom: "Lyon", coords: [45.7640, 4.8357], zoom: 13, activites: [
+      "Café-débat « Pourquoi travailler un lundi ? »",
+      "Atelier CV : la police Comic Sans est-elle un frein ?",
+      "Marche collective jusqu'au guichet fermé" ] },
+    { nom: "Marseille", coords: [43.2965, 5.3698], zoom: 13, activites: [
+      "Séminaire « L'art de la relance téléphonique infinie »",
+      "Pique-nique devant le pôle emploi",
+      "Atelier photocopie de justificatifs (durée illimitée)" ] },
+    { nom: "Toulouse", coords: [43.6047, 1.4442], zoom: 13, activites: [
+      "Conférence « Le formulaire Cerfa, entre mythe et réalité »",
+      "Groupe de parole : accepter le statu quo",
+      "Atelier lecture d'annonces sans postuler" ] },
+    { nom: "Lille", coords: [50.6292, 3.0573], zoom: 13, activites: [
+      "Rencontre « Un jour, peut-être, un entretien »",
+      "Atelier rédaction de lettres jamais envoyées",
+      "Stand café pour faire passer le temps" ] },
+    { nom: "Bordeaux", coords: [44.8378, -0.5792], zoom: 13, activites: [
+      "Visite guidée du bâtiment sans les bureaux ouverts",
+      "Atelier « Patienter avec le sourire »",
+      "Dégustation de café d'attente" ] },
+    { nom: "Nantes", coords: [47.2184, -1.5536], zoom: 13, activites: [
+      "Atelier « Remplir le même dossier deux fois »",
+      "Réunion sur la file d'attente virtuelle",
+      "Groupe de soutien anti-motivation" ] },
+    { nom: "Strasbourg", coords: [48.5734, 7.7521], zoom: 13, activites: [
+      "Conférence transfrontalière sur l'inactivité",
+      "Atelier traduction de formulaires incompréhensibles",
+      "Marche silencieuse jusqu'à l'accueil" ] }
+  ];
+
+  const selectVille = document.getElementById('select-ville');
   const activitesBox = document.getElementById('activites-ville');
   const activitesTitre = document.getElementById('activites-titre');
   const activitesListe = document.getElementById('activites-liste');
 
   let markerVille = null;
-  let suggestionsActuelles = [];
-  let indexActif = -1;
-  let minuteurRecherche = null;
-  let controleurRecherche = null;
-  let idRequeteActuelle = 0;
 
-  function normaliser(texte) {
-    return texte
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase()
-      .trim();
-  }
-
-  function surlignerCorrespondance(nom, requete) {
-    const nomNormalise = normaliser(nom);
-    const requeteNormalisee = normaliser(requete);
-    const position = nomNormalise.indexOf(requeteNormalisee);
-    if (position === -1 || !requeteNormalisee) return nom;
-    return (
-      nom.slice(0, position) +
-      '<span class="suggestion-souligne">' + nom.slice(position, position + requeteNormalisee.length) + '</span>' +
-      nom.slice(position + requeteNormalisee.length)
-    );
-  }
-
-  function fermerSuggestions() {
-    listeSuggestions.hidden = true;
-    listeSuggestions.innerHTML = '';
-    rechercheVille.setAttribute('aria-expanded', 'false');
-    suggestionsActuelles = [];
-    indexActif = -1;
-  }
-
-  function afficherMessageSuggestions(message) {
-    listeSuggestions.innerHTML = '';
-    const li = document.createElement('li');
-    li.className = 'aucun-resultat';
-    li.textContent = message;
-    listeSuggestions.appendChild(li);
-    listeSuggestions.hidden = false;
-    rechercheVille.setAttribute('aria-expanded', 'true');
-  }
-
-  function mettreAJourActif() {
-    const elements = listeSuggestions.querySelectorAll('li[role="option"]');
-    elements.forEach((element, index) => {
-      element.classList.toggle('active', index === indexActif);
-    });
-    if (indexActif >= 0 && elements[indexActif]) {
-      elements[indexActif].scrollIntoView({ block: 'nearest' });
-    }
-  }
-
-  // Interroge l'API Géo officielle (https://geo.api.gouv.fr) : toutes les ~35 000 communes de France
-  async function chercherCommunes(requete) {
-    idRequeteActuelle += 1;
-    const idCourant = idRequeteActuelle;
-
-    if (controleurRecherche) controleurRecherche.abort();
-    controleurRecherche = new AbortController();
-
-    const url = 'https://geo.api.gouv.fr/communes?nom=' + encodeURIComponent(requete) +
-      '&fields=nom,centre,codesPostaux,population&boost=population&limit=15';
-
-    try {
-      const reponse = await fetch(url, { signal: controleurRecherche.signal });
-      if (!reponse.ok) throw new Error('Réponse API Géo invalide (' + reponse.status + ')');
-      const communes = await reponse.json();
-
-      // On ignore le résultat si une recherche plus récente a été lancée entre-temps
-      if (idCourant !== idRequeteActuelle) return;
-
-      suggestionsActuelles = communes.map(commune => ({
-        nom: commune.nom,
-        coords: [commune.centre.coordinates[1], commune.centre.coordinates[0]], // GeoJSON = [lon, lat]
-        zoom: 13,
-        codesPostaux: commune.codesPostaux || [],
-        population: commune.population || null
-      }));
-      indexActif = -1;
-      listeSuggestions.innerHTML = '';
-
-      if (suggestionsActuelles.length === 0) {
-        afficherMessageSuggestions('Aucune commune trouvée');
-        return;
-      }
-
-      suggestionsActuelles.forEach((ville, index) => {
-        const li = document.createElement('li');
-        li.id = 'suggestion-ville-' + index;
-        li.role = 'option';
-        const codePostal = ville.codesPostaux[0] ? ' (' + ville.codesPostaux[0] + ')' : '';
-        li.innerHTML = surlignerCorrespondance(ville.nom, requete) +
-          '<span style="color:var(--text-mention-grey,#666);font-size:0.875rem;">' + codePostal + '</span>';
-        li.addEventListener('mousedown', (event) => {
-          // mousedown pour agir avant le blur du champ
-          event.preventDefault();
-          selectionnerVille(ville);
-        });
-        listeSuggestions.appendChild(li);
-      });
-
-      listeSuggestions.hidden = false;
-      rechercheVille.setAttribute('aria-expanded', 'true');
-    } catch (erreur) {
-      if (erreur.name === 'AbortError') return;
-      if (idCourant !== idRequeteActuelle) return;
-      console.error(erreur);
-      afficherMessageSuggestions('Erreur de recherche, réessayez.');
-    }
-  }
-
-  function afficherSuggestions(requete) {
-    const requeteNettoyee = requete.trim();
-
-    clearTimeout(minuteurRecherche);
-
-    if (requeteNettoyee === '') {
-      if (controleurRecherche) controleurRecherche.abort();
-      fermerSuggestions();
-      return;
-    }
-
-    if (requeteNettoyee.length < 2) {
-      afficherMessageSuggestions('Continuez à taper...');
-      return;
-    }
-
-    // Anti-rebond : on attend que l'utilisateur arrête de taper avant d'interroger l'API
-    minuteurRecherche = setTimeout(() => chercherCommunes(requeteNettoyee), 250);
-  }
-
-  function selectionnerVille(ville) {
-    rechercheVille.value = ville.nom;
-    fermerSuggestions();
-    afficherVille(ville);
-    rechercheVille.blur();
-  }
-
-  rechercheVille.addEventListener('input', (event) => {
-    afficherSuggestions(event.target.value);
-  });
-
-  rechercheVille.addEventListener('focus', (event) => {
-    if (event.target.value.trim() !== '') {
-      afficherSuggestions(event.target.value);
-    }
-  });
-
-  rechercheVille.addEventListener('keydown', (event) => {
-    if (listeSuggestions.hidden || suggestionsActuelles.length === 0) return;
-
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      indexActif = (indexActif + 1) % suggestionsActuelles.length;
-      mettreAJourActif();
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      indexActif = (indexActif - 1 + suggestionsActuelles.length) % suggestionsActuelles.length;
-      mettreAJourActif();
-    } else if (event.key === 'Enter') {
-      event.preventDefault();
-      if (indexActif >= 0) {
-        selectionnerVille(suggestionsActuelles[indexActif]);
-      } else if (suggestionsActuelles.length === 1) {
-        selectionnerVille(suggestionsActuelles[0]);
-      }
-    } else if (event.key === 'Escape') {
-      fermerSuggestions();
-    }
-  });
-
-  document.addEventListener('click', (event) => {
-    if (!event.target.closest('.fr-search-ville')) {
-      fermerSuggestions();
-    }
+  villes.forEach((ville, index) => {
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = ville.nom;
+    selectVille.appendChild(option);
   });
 
   function afficherVille(ville) {
@@ -493,18 +313,11 @@
     if (markerVille) map.removeLayer(markerVille);
     markerVille = L.marker(ville.coords).addTo(map).bindPopup(ville.nom).openPopup();
 
-    activitesTitre.textContent = "Commune sélectionnée";
+    activitesTitre.textContent = "Activités autour de " + ville.nom;
     activitesListe.innerHTML = "";
-
-    const infosCommune = [
-      "Nom : " + ville.nom,
-      ville.codesPostaux && ville.codesPostaux.length ? "Code(s) postal(aux) : " + ville.codesPostaux.join(', ') : null,
-      ville.population ? "Population : " + ville.population.toLocaleString('fr-FR') + " habitants" : null
-    ].filter(Boolean);
-
-    infosCommune.forEach(info => {
+    ville.activites.forEach(activite => {
       const li = document.createElement('li');
-      li.textContent = info;
+      li.textContent = activite;
       activitesListe.appendChild(li);
     });
     activitesBox.hidden = false;
@@ -512,6 +325,12 @@
     showAlert('info', ville.nom, "Carte centrée sur " + ville.nom + ".");
     rechercherLieux();
   }
+
+  selectVille.addEventListener('change', (event) => {
+    const index = event.target.value;
+    if (index === "") return;
+    afficherVille(villes[index]);
+  });
 
   // --- Géolocalisation ---
   if ('geolocation' in navigator) {
@@ -589,7 +408,7 @@
         .replace('LON', centre.lng)
     ).join('\n');
 
-    const requeteOverpass = `[out:json][timeout:25];(${requetes});out center;`;
+    const requeteOverpass = `[out:json][timeout:40];(${requetes});out center;`;
 
     try {
       const reponse = await fetch('https://overpass-api.de/api/interpreter', {
