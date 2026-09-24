@@ -117,11 +117,21 @@
         }
 
         #contacts p {
-            color: #a1a1aa;
+            color: #3c3c3f;
             margin-bottom: 40px;
             font-size: 1.2rem;
             font-weight: 400;
             line-height: 1.6;
+        }
+
+        #contacts a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        #contacts a:hover {
+            color: #f093fb;
         }
 
         .divider {
@@ -159,7 +169,7 @@
             top: 50%;
             left: 20px;
             transform: translateY(-50%);
-            color: #71717a;
+            color: #8585a0;
             font-size: 16px;
             font-weight: 500;
             pointer-events: none;
@@ -432,15 +442,15 @@
         <div class="glass-container">
             <h2>Me contacter par mail</h2>
 
-            <center> <p>Vous pouvez me contacter par mail sur ces 2 adresses mail :</p></center>
+            <center> <p>Vous pouvez nous contactez par mail sur l'une des 2 adresses mail suivantes :</p></center>
             <div id="liens" id="topL" style="text-align: center; border-radius: 110px;">
                 <nav>
                     <ul>
-                        <li><a >telio.desmet@gmail.com</a></li>
+                        <li><a>scotty.verscheure@my-digital-school.org</a></li>
                         <li><a>telio.desmet@my-digital-school.org</a></li>
                     </ul>
                     <br>
-                    <center><p>Vous pouvez aussi contacter mon établissement pour plus d'informations sur les alternances:</p></center>*
+                    <center><p>Vous pouvez aussi contactez notre établissement pour plus d'informations sur les activitées de chômeurs professionnels:</p></center>*
                     <nav>
                         <ul>
                             <li><a>amelie.catteau@mydigitalschool.com</a></li>
@@ -448,7 +458,7 @@
                 </nav>
 
                 <br>
-            <p>Pour me contacter, n'hésitez pas à utiliser cette messagerie intégrée !</p>
+            <p>Pour nous contactez, n'hésitez pas à utiliser cette messagerie intégrée !</p>
             <div class="divider"></div>
             
             <form method="POST" id="form">
@@ -600,28 +610,77 @@
         <div id="liens" id="topL" style="text-align: center; border-radius: 110px;">
         <nav>
           <ul>
-            <li><a href="https://www.linkedin.com/in/t%C3%A9lio-desmet-159604338/?isSelfProfile=true">Linkedin</a></li>
-            <li><a href="https://profile.indeed.com/?hl=fr_FR&co=FR&from=gnav-homepage">Indeed</a></li>
-            <li><a href="https://github.com/telio-desmet">GitHub</a></li>
+            <li><a href="https://www.linkedin.com/in/t%C3%A9lio-desmet-159604338/?isSelfProfile=true"><img src="icon logo/LinkedIn Logo - Colored - zonalogo.com.png" alt="LinkedIn"></a></li>
+            <li><a href="https://profile.indeed.com/?hl=fr_FR&co=FR&from=gnav-homepage"><img src="icon logo/toppng.com-indeed-logo-385x101.png" alt="Indeed"></a></li>
+            <li><a href="https://github.com/telio-desmet"><img src="icon logo/GitHub_Lockup_Black_Clearspace.png" alt="GitHub"></a></li>
           </ul>
         </nav>
         </div>
         </div>
+        <style>
+          #liens ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+          }
+
+          #liens li {
+            display: inline-block;
+          }
+
+          #liens img {
+            width: 180px;
+            height: 50px;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+          }
+
+          #liens img:hover {
+            transform: scale(1.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+          }
+        </style>
       </section>
 
       <br>
 
         <br>
 
-        <section id="contact3">
-        <h2>Me contacter par téléphone</h2>
-        <p>Voici mon numéro de téléphone :</p>
+      <section id="contact3">
+        <h2>Contacte d'un responsable</h2>
+        <p>Voici le numéro de téléphone :</p>
         <nav>
         <ul>
         <li><a>06 74 80 33 19</a></li>
         </ul>
         </nav>
       </section>
+      <style>
+        #contact3 ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        #contact3 li {
+            display: inline-block;
+        }
+
+        #contact3 a {
+            font-size: 1.5rem;
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        #contact3 a:hover {
+            color: #f093fb;
+            transform: scale(1.1);
+        }
+       </style>
       <br>
   </main>
   </section>
