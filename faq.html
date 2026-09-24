@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.min.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.module.min.js"></script>
+<script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.nomodule.min.js"></script>
+<link rel="icon" href="files/icon.ico" type="image/x-icon">
+<title>Ministère du Chômage — République Française</title>
+<link rel="stylesheet" href="CSS/style.css">
+
+<style>
+  .carousel {
+    position: relative;
+    margin-top: 1rem;
+  }
+
+  .carousel__piste {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 0.5rem;
+    /* Masquer la barre de scroll tout en gardant le défilement tactile/souris */
+    scrollbar-width: none;
+  }
+  .carousel__piste::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel__item {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+  @media (min-width: 48em) {
+    .carousel__item { flex-basis: 45%; }
+  }
+  @media (min-width: 62em) {
+    .carousel__item { flex-basis: 31%; }
+  }
+
+  .carousel__controles {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .carousel__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--border-default-grey);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  .carousel__dot[aria-current="true"] {
+    background-color: var(--background-action-high-blue-france);
+  }
+</style>
+</head>
+<body>
+
+<header role="banner" class="fr-header">
+  <div class="fr-header__body">
+    <div class="fr-container">
+      <div class="fr-header__body-row">
+        <div class="fr-header__brand fr-enlarge-link">
+          <div class="fr-header__brand-top">
+            <div class="fr-header__logo">
+              <p class="fr-logo">République<br>Française</p>
+            </div>
+            <div class="fr-header__navbar">
+              <button class="fr-btn--menu fr-btn" data-fr-opened="false" aria-controls="modal-menu" aria-haspopup="menu" id="button-menu" title="Menu">Menu</button>
+            </div>
+          </div>
+          <div class="fr-header__service">
+            <a href="#accueil" title="Accueil — Ministère du Chômage">
+              <p class="fr-header__service-title">Ministère du Chômage</p>
+            </a>
+            <p class="fr-header__service-tagline">Liberté &nbsp;·&nbsp; Égalité &nbsp;·&nbsp; Fraternité</p>
+          </div>
+        </div>
+        <div class="fr-header__tools">
+          <div class="fr-header__tools-links">
+            <ul class="fr-links-group">
+              <li><a class="fr-link" href="#">gouv.fr</a></li>
+              <li><a class="fr-link" href="#">legifrance.gouv.fr</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fr-header__menu fr-modal" id="modal-menu" aria-labelledby="button-menu">
+    <div class="fr-container">
+      <button class="fr-btn--close fr-btn" aria-controls="modal-menu" title="Fermer">Fermer</button>
+      <div class="fr-header__menu-links"></div>
+      <nav class="fr-nav" id="navigation-principale" role="navigation" aria-label="Menu principal">
+        <ul class="fr-nav__list">
+          <li class="fr-nav__item"><a class="fr-nav__link" href="index.html" aria-current="page">Accueil</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="documents.html">Démarches administratives</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="activitees.html">Carte des activitées</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="actu.html">Actualités</a></li>
+          <li class="fr-nav__item"><a class="fr-nav__link" href="contact.html">Ne pas nous contacter</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<section class="fr-hero" id="accueil">
+  <div class="fr-hero__inner">
+    <div>
+      <h1>Bienvenue au Ministère du Chômage</h1>
+      <p class="lede">Notre mission (Parodique bien sur) : vous accompagner à ne surtout rien faire, avec le même sérieux administratif que n'importe quel autre ministère. Formulaires en trois exemplaires, jargon incompréhensible et délais de traitement infinis inclus.</p>
+    </div>
+    <div class="fr-hero__badge">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="38" fill="none" stroke="#000091" stroke-width="2"/>
+        <circle cx="40" cy="40" r="30" fill="none" stroke="#e1000f" stroke-width="1"/>
+        <text x="40" y="36" text-anchor="middle" font-family="Spectral, serif" font-size="9" fill="#161616" font-weight="600">SERVICE</text>
+        <text x="40" y="48" text-anchor="middle" font-family="Spectral, serif" font-size="9" fill="#161616" font-weight="600">PUBLIC</text>
+        <text x="40" y="58" text-anchor="middle" font-family="Work Sans, sans-serif" font-size="6" fill="#3a3a3a">de l'inaction</text>
+      </svg>
+      <span>Certifié conforme à la lenteur républicaine</span>
+    </div>
+  </div>
+</section>
+
+
+
+
+<main class="fr-container">
+  <section id="actus" aria-labelledby="actus-title" class="fr-mt-6w">
+    <h2 id="actus-title">Actualités</h2>
+
+    <div class="carousel" aria-roledescription="carousel" aria-label="Actualités">
+      <div class="carousel__piste" id="carousel-piste" tabindex="0">
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="1 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Le Ministère du Chômage lance une nouvelle initiative pour encourager l'inaction.</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="2 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--green-emeraude fr-badge--no-icon">Démarche</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Découvrez nos nouvelles procédures administratives pour maximiser votre temps libre.</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="3 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon">Évènement</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Participez à notre concours annuel de procrastination et gagnez des prix incroyables !</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="4 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--yellow-tournesol fr-badge--no-icon">Statistiques</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Le taux d'attente moyen aux guichets atteint un nouveau record historique.</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="5 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--orange-terre-battue fr-badge--no-icon">Alerte</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Un formulaire Cerfa aurait été rempli intégralement : les experts restent sceptiques.</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="6 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--blue-cumulus fr-badge--no-icon">Communiqué</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Nouveau service en ligne : la demande de rendez-vous pour prendre un autre rendez-vous.</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="7 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--pink-macaron fr-badge--no-icon">Portrait</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Il n'a rien fait depuis 1998 : rencontre avec le fonctionnaire le plus décoré du ministère.</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="8 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--green-menthe fr-badge--no-icon">Démarche</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Simplification administrative : le dossier passe de 12 à 11 pages (une victoire).</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="9 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--brown-opera fr-badge--no-icon">Évènement</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Journée portes fermées : venez ne rien visiter dans nos locaux inaccessibles.</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="10 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--beige-gris-galet fr-badge--no-icon">Statistiques</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Le standard téléphonique a établi un nouveau record de musique d'attente ininterrompue.</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="11 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon">Alerte</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Un usager aurait reçu une réponse à son courrier envoyé en 2019.</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="12 sur 12">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Le ministère annonce ne rien annoncer avant nouvel ordre.</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="carousel__controles">
+        <button class="fr-btn fr-btn--secondary fr-icon-arrow-left-s-line" id="carousel-prev" type="button" aria-label="Actualité précédente"></button>
+        <button class="fr-btn fr-btn--secondary fr-icon-arrow-right-s-line" id="carousel-next" type="button" aria-label="Actualité suivante"></button>
+      </div>
+
+      <div class="carousel__dots" id="carousel-dots"></div>
+    </div>
+  </section>
+
+  <br>
+
+  <div class="fr-callout">
+    <h2 class="fr-callout__title">Une question ? Une démarche à ne pas faire ?</h2>
+    <p class="fr-callout__text">Nos guichets sont ouverts de jamais à jamais. Un agent ne vous recontactera sous aucun délai déterminé.</p>
+    <a class="fr-btn" href="#">Ne rien entreprendre</a>
+  </div>
+</main>
+
+<footer class="fr-footer" role="contentinfo" id="footer">
+  <div class="fr-container">
+    <div class="fr-footer__body">
+      <div class="fr-footer__brand fr-enlarge-link">
+        <a href="#accueil" title="Retour à l'accueil — Ministère du Chômage">
+          <p class="fr-logo">République<br>Française</p>
+        </a>
+      </div>
+      <div class="fr-footer__content">
+        <p class="fr-footer__content-desc">Ministère du Chômage — site parodique, aucune démarche réelle n'est possible ici.</p>
+        <ul class="fr-footer__content-list">
+          <li class="fr-footer__content-item"><a class="fr-footer__content-link" href="#">Organigramme fantôme</a></li>
+          <li class="fr-footer__content-item"><a class="fr-footer__content-link" href="#">Formulaire Cerfa n°00000</a></li>
+          <li class="fr-footer__content-item"><a class="fr-footer__content-link" href="#">Foire aux excuses</a></li>
+          <li class="fr-footer__content-item"><a class="fr-footer__content-link" href="#">Statistiques introuvables</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="fr-footer__bottom">
+      <ul class="fr-footer__bottom-list">
+        <li class="fr-footer__bottom-item"><a class="fr-footer__bottom-link" href="#">Plan du site (vide)</a></li>
+        <li class="fr-footer__bottom-item"><a class="fr-footer__bottom-link" href="#">Accessibilité : non conforme</a></li>
+        <li class="fr-footer__bottom-item"><a class="fr-footer__bottom-link" href="#">Mentions inutiles</a></li>
+      </ul>
+      <div class="fr-footer__bottom-copy">
+        <p>© République Française — Ministère du Chômage.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const piste = document.getElementById('carousel-piste');
+  const items = Array.from(piste.querySelectorAll('.carousel__item'));
+  const boutonPrev = document.getElementById('carousel-prev');
+  const boutonNext = document.getElementById('carousel-next');
+  const dotsBox = document.getElementById('carousel-dots');
+
+  // Génération des points de navigation (un par actualité)
+  items.forEach((item, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel__dot';
+    dot.type = 'button';
+    dot.setAttribute('aria-label', "Aller à l'actualité " + (index + 1));
+    dot.addEventListener('click', () => {
+      items[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    });
+    dotsBox.appendChild(dot);
+  });
+  const dots = Array.from(dotsBox.querySelectorAll('.carousel__dot'));
+
+  function indexVisible() {
+    const pisteRect = piste.getBoundingClientRect();
+    let plusProche = 0;
+    let distanceMin = Infinity;
+    items.forEach((item, index) => {
+      const distance = Math.abs(item.getBoundingClientRect().left - pisteRect.left);
+      if (distance < distanceMin) {
+        distanceMin = distance;
+        plusProche = index;
+      }
+    });
+    return plusProche;
+  }
+
+  function majDots() {
+    const actif = indexVisible();
+    dots.forEach((dot, index) => {
+      dot.setAttribute('aria-current', index === actif ? 'true' : 'false');
+    });
+  }
+
+  function defiler(sens) {
+    const largeurItem = items[0].getBoundingClientRect().width + 16; // 16px = gap
+    piste.scrollBy({ left: sens * largeurItem, behavior: 'smooth' });
+  }
+
+  boutonPrev.addEventListener('click', () => defiler(-1));
+  boutonNext.addEventListener('click', () => defiler(1));
+  piste.addEventListener('scroll', () => {
+    window.requestAnimationFrame(majDots);
+  });
+
+  majDots();
+</script>
+
+</body>
+</html>
