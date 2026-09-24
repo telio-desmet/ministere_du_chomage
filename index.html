@@ -9,6 +9,64 @@
 <link rel="icon" href="files/icon.ico" type="image/x-icon">
 <title>Ministère du Chômage — République Française</title>
 <link rel="stylesheet" href="CSS/style.css">
+
+<style>
+  .carousel {
+    position: relative;
+    margin-top: 1rem;
+  }
+
+  .carousel__piste {
+    display: flex;
+    gap: 1rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    padding-bottom: 0.5rem;
+    /* Masquer la barre de scroll tout en gardant le défilement tactile/souris */
+    scrollbar-width: none;
+  }
+  .carousel__piste::-webkit-scrollbar {
+    display: none;
+  }
+
+  .carousel__item {
+    flex: 0 0 85%;
+    scroll-snap-align: start;
+  }
+  @media (min-width: 48em) {
+    .carousel__item { flex-basis: 45%; }
+  }
+  @media (min-width: 62em) {
+    .carousel__item { flex-basis: 31%; }
+  }
+
+  .carousel__controles {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .carousel__dots {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+  }
+  .carousel__dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background-color: var(--border-default-grey);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  .carousel__dot[aria-current="true"] {
+    background-color: var(--background-action-high-blue-france);
+  }
+</style>
 </head>
 <body>
 
@@ -85,43 +143,57 @@
 <main class="fr-container">
   <section id="actus" aria-labelledby="actus-title" class="fr-mt-6w">
     <h2 id="actus-title">Actualités</h2>
-    <div class="fr-grid-row fr-grid-row--gutters">
-      <div class="fr-col-12 fr-col-md-4">
-        <div class="fr-card fr-enlarge-link">
-          <div class="fr-card__body">
-            <div class="fr-card__content">
-              <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué</p>
-              <h3 class="fr-card__title">
-                <a href="#">Le Ministère du Chômage lance une nouvelle initiative pour encourager l'inaction.</a>
-              </h3>
+
+    <div class="carousel" aria-roledescription="carousel" aria-label="Actualités">
+      <div class="carousel__piste" id="carousel-piste" tabindex="0">
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="1 sur 3">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--blue-ecume fr-badge--no-icon">Communiqué</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Le Ministère du Chômage lance une nouvelle initiative pour encourager l'inaction.</a>
+                </h3>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="fr-col-12 fr-col-md-4">
-        <div class="fr-card fr-enlarge-link">
-          <div class="fr-card__body">
-            <div class="fr-card__content">
-              <p class="fr-badge fr-badge--green-emeraude fr-badge--no-icon">Démarche</p>
-              <h3 class="fr-card__title">
-                <a href="#">Découvrez nos nouvelles procédures administratives pour maximiser votre temps libre.</a>
-              </h3>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="2 sur 3">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--green-emeraude fr-badge--no-icon">Démarche</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Découvrez nos nouvelles procédures administratives pour maximiser votre temps libre.</a>
+                </h3>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="fr-col-12 fr-col-md-4">
-        <div class="fr-card fr-enlarge-link">
-          <div class="fr-card__body">
-            <div class="fr-card__content">
-              <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon">Évènement</p>
-              <h3 class="fr-card__title">
-                <a href="#">Participez à notre concours annuel de procrastination et gagnez des prix incroyables !</a>
-              </h3>
+
+        <div class="carousel__item" role="group" aria-roledescription="diapositive" aria-label="3 sur 3">
+          <div class="fr-card fr-enlarge-link">
+            <div class="fr-card__body">
+              <div class="fr-card__content">
+                <p class="fr-badge fr-badge--purple-glycine fr-badge--no-icon">Évènement</p>
+                <h3 class="fr-card__title">
+                  <a href="#">Participez à notre concours annuel de procrastination et gagnez des prix incroyables !</a>
+                </h3>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
+
+      <div class="carousel__controles">
+        <button class="fr-btn fr-btn--secondary fr-icon-arrow-left-s-line" id="carousel-prev" type="button" aria-label="Actualité précédente"></button>
+        <button class="fr-btn fr-btn--secondary fr-icon-arrow-right-s-line" id="carousel-next" type="button" aria-label="Actualité suivante"></button>
+      </div>
+
+      <div class="carousel__dots" id="carousel-dots"></div>
     </div>
   </section>
 
@@ -164,6 +236,61 @@
     </div>
   </div>
 </footer>
+
+<script>
+  const piste = document.getElementById('carousel-piste');
+  const items = Array.from(piste.querySelectorAll('.carousel__item'));
+  const boutonPrev = document.getElementById('carousel-prev');
+  const boutonNext = document.getElementById('carousel-next');
+  const dotsBox = document.getElementById('carousel-dots');
+
+  // Génération des points de navigation (un par actualité)
+  items.forEach((item, index) => {
+    const dot = document.createElement('button');
+    dot.className = 'carousel__dot';
+    dot.type = 'button';
+    dot.setAttribute('aria-label', "Aller à l'actualité " + (index + 1));
+    dot.addEventListener('click', () => {
+      items[index].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    });
+    dotsBox.appendChild(dot);
+  });
+  const dots = Array.from(dotsBox.querySelectorAll('.carousel__dot'));
+
+  function indexVisible() {
+    const pisteRect = piste.getBoundingClientRect();
+    let plusProche = 0;
+    let distanceMin = Infinity;
+    items.forEach((item, index) => {
+      const distance = Math.abs(item.getBoundingClientRect().left - pisteRect.left);
+      if (distance < distanceMin) {
+        distanceMin = distance;
+        plusProche = index;
+      }
+    });
+    return plusProche;
+  }
+
+  function majDots() {
+    const actif = indexVisible();
+    dots.forEach((dot, index) => {
+      dot.setAttribute('aria-current', index === actif ? 'true' : 'false');
+    });
+  }
+
+  function defiler(sens) {
+    const largeurItem = items[0].getBoundingClientRect().width + 16; // 16px = gap
+    piste.scrollBy({ left: sens * largeurItem, behavior: 'smooth' });
+  }
+
+  boutonPrev.addEventListener('click', () => defiler(-1));
+  boutonNext.addEventListener('click', () => defiler(1));
+  piste.addEventListener('scroll', () => {
+    window.requestAnimationFrame(majDots);
+  });
+
+  majDots();
+</script>
 
 </body>
 </html>
