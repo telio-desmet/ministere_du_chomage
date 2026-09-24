@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/utility/utility.min.css">
 <script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.module.min.js"></script>
 <script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.nomodule.min.js"></script>
 <link rel="icon" href="files/icon.ico" type="image/x-icon">
@@ -11,21 +12,64 @@
 <link rel="stylesheet" href="CSS/style.css">
 
 <!-- Leaflet -->
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <!-- DSFR : CSS core + utilitaires (via jsDelivr, package npm officiel @gouvfr/dsfr) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.1/dist/dsfr.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.13.1/dist/utility/utility.min.css">
-  <style>
-    /* Réglages propres à cette page uniquement (la mise en page vient du DSFR) */
-    #map {
-      height: 480px;
-      width: 100%;
-      border: 1px solid var(--border-default-grey);
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<style>
+  /* Réglages propres à cette page uniquement (la mise en page vient du DSFR) */
+  .fr-alert--geoloc {
+    margin-bottom: 1.5rem;
+  }
+
+  .carte-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 62em) {
+    .carte-layout {
+      grid-template-columns: 1fr;
     }
-    .fr-alert--geoloc {
-      margin-bottom: 1.5rem;
-    }
-  </style>
+  }
+
+  #map {
+    height: 480px;
+    width: 100%;
+    border: 1px solid var(--border-default-grey);
+  }
+
+  .liste-villes {
+    border: 1px solid var(--border-default-grey);
+    border-radius: 0.25rem;
+    padding: 1rem;
+    background-color: var(--background-default-grey);
+  }
+
+  .liste-villes h2 {
+    font-size: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  #activites-ville {
+    margin-top: 1.5rem;
+  }
+
+  #activites-ville ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  #activites-ville li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-default-grey);
+  }
+
+  #activites-ville li:last-child {
+    border-bottom: none;
+  }
+</style>
 </head>
 
 <body>
@@ -95,363 +139,46 @@
     </div>
   </div>
 </section>
-  <main role="main" id="contenu">
-    <div class="fr-container fr-py-6w">
-    
-      <h1>Votre position</h1>
-          <style>
-    /* Réglages propres à cette page uniquement (la mise en page vient du DSFR) */
-    .fr-alert--geoloc {
-      margin-bottom: 1.5rem;
-    }
 
-    .carte-layout {
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      gap: 1.5rem;
-      align-items: start;
-    }
+<main role="main" id="contenu">
+  <div class="fr-container fr-py-6w">
 
-    @media (max-width: 62em) {
-      .carte-layout {
-        grid-template-columns: 1fr;
-      }
-    }
+    <h1>Votre position</h1>
+    <p class="fr-text--lead">
+      Cette page utilise votre position pour vous montrer les services les plus proches, ou choisissez une ville dans la liste.
+    </p>
 
-    #map {
-      height: 480px;
-      width: 100%;
-      border: 1px solid var(--border-default-grey);
-    }
+    <div id="geoloc-alert" class="fr-alert fr-alert--info fr-alert--geoloc" hidden>
+      <h3 class="fr-alert__title" id="geoloc-alert-title">Localisation</h3>
+      <p id="geoloc-alert-text"></p>
+    </div>
 
-    .liste-villes {
-      border: 1px solid var(--border-default-grey);
-      border-radius: 0.25rem;
-      padding: 1rem;
-      background-color: var(--background-default-grey);
-    }
+    <div class="carte-layout">
+      <div class="liste-villes">
+        <h2 id="select-ville-label">Choisir une ville</h2>
 
-    .liste-villes h2 {
-      font-size: 1rem;
-      margin-bottom: 0.75rem;
-    }
-
-    #activites-ville {
-      margin-top: 1.5rem;
-    }
-
-    #activites-ville ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    #activites-ville li {
-      padding: 0.5rem 0;
-      border-bottom: 1px solid var(--border-default-grey);
-    }
-
-    #activites-ville li:last-child {
-      border-bottom: none;
-    }
-  </style>
-
-    <main role="main" id="contenu">
-    <div class="fr-container fr-py-6w">
-
-      <h1>Votre position</h1>
-      <p class="fr-text--lead">
-        Cette page utilise votre position pour vous montrer les services les plus proches, ou choisissez une ville dans la liste.
-      </p>
-
-      <div id="geoloc-alert" class="fr-alert fr-alert--info fr-alert--geoloc" hidden>
-        <h3 class="fr-alert__title" id="geoloc-alert-title">Localisation</h3>
-        <p id="geoloc-alert-text"></p>
-      </div>
-
-      <div class="carte-layout">
-        <div class="liste-villes">
-          <h2 id="select-ville-label">Choisir une ville</h2>
-
-          <div class="fr-select-group">
-            <label class="fr-label" for="select-ville">Ville</label>
-            <select class="fr-select" id="select-ville" aria-labelledby="select-ville-label">
-              <option value="" selected disabled>-- Sélectionnez une ville --</option>
-            </select>
-          </div>
-
-          <div id="activites-ville" hidden>
-            <h3 id="activites-titre">Activités</h3>
-            <ul id="activites-liste"></ul>
-          </div>
+        <div class="fr-select-group">
+          <label class="fr-label" for="select-ville">Ville</label>
+          <select class="fr-select" id="select-ville" aria-labelledby="select-ville-label">
+            <option value="" selected disabled>-- Sélectionnez une ville --</option>
+          </select>
         </div>
 
-        <div id="map"></div>
-      </div>
-
-      <p class="fr-hint-text fr-mt-2w">
-        Si vous refusez la géolocalisation, la carte reste centrée sur Paris.
-      </p>
-
-    </div>
-  </main>
-  <!-- Leaflet -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-    <script>
-    // Position par défaut : Paris
-    const defaultCoords = [48.8566, 2.3522];
-    const map = L.map('map').setView(defaultCoords, 13);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 19
-    }).addTo(map);
-
-    const alertBox = document.getElementById('geoloc-alert');
-    const alertTitle = document.getElementById('geoloc-alert-title');
-    const alertText = document.getElementById('geoloc-alert-text');
-
-    function showAlert(type, title, text) {
-      alertBox.hidden = false;
-      alertBox.classList.remove('fr-alert--info', 'fr-alert--success', 'fr-alert--warning', 'fr-alert--error');
-      alertBox.classList.add('fr-alert--' + type);
-      alertTitle.textContent = title;
-      alertText.textContent = text;
-    }
-
-    // --- Villes et activités associées ---
-    const villes = [
-      {
-        nom: "Paris",
-        coords: [48.8566, 2.3522],
-        zoom: 13,
-        activites: [
-          "Atelier « Regarder les offres d'emploi sans postuler »",
-          "Réunion d'information sur la salle d'attente",
-          "Simulation d'entretien avec un miroir"
-        ]
-      },
-      {
-        nom: "Lyon",
-        coords: [45.7640, 4.8357],
-        zoom: 13,
-        activites: [
-          "Café-débat « Pourquoi travailler un lundi ? »",
-          "Atelier CV : la police Comic Sans est-elle un frein ?",
-          "Marche collective jusqu'au guichet fermé"
-        ]
-      },
-      {
-        nom: "Marseille",
-        coords: [43.2965, 5.3698],
-        zoom: 13,
-        activites: [
-          "Séminaire « L'art de la relance téléphonique infinie »",
-          "Pique-nique devant le pôle emploi",
-          "Atelier photocopie de justificatifs (durée illimitée)"
-        ]
-      },
-      {
-        nom: "Toulouse",
-        coords: [43.6047, 1.4442],
-        zoom: 13,
-        activites: [
-          "Conférence « Le formulaire Cerfa, entre mythe et réalité »",
-          "Groupe de parole : accepter le statu quo",
-          "Atelier lecture d'annonces sans postuler"
-        ]
-      },
-      {
-        nom: "Lille",
-        coords: [50.6292, 3.0573],
-        zoom: 13,
-        activites: [
-          "Rencontre « Un jour, peut-être, un entretien »",
-          "Atelier rédaction de lettres jamais envoyées",
-          "Stand café pour faire passer le temps"
-        ]
-      },
-      {
-        nom: "Bordeaux",
-        coords: [44.8378, -0.5792],
-        zoom: 13,
-        activites: [
-          "Visite guidée du bâtiment sans les bureaux ouverts",
-          "Atelier « Patienter avec le sourire »",
-          "Dégustation de café d'attente"
-        ]
-      },
-      {
-        nom: "Nantes",
-        coords: [47.2184, -1.5536],
-        zoom: 13,
-        activites: [
-          "Atelier « Remplir le même dossier deux fois »",
-          "Réunion sur la file d'attente virtuelle",
-          "Groupe de soutien anti-motivation"
-        ]
-      },
-      {
-        nom: "Strasbourg",
-        coords: [48.5734, 7.7521],
-        zoom: 13,
-        activites: [
-          "Conférence transfrontalière sur l'inactivité",
-          "Atelier traduction de formulaires incompréhensibles",
-          "Marche silencieuse jusqu'à l'accueil"
-        ]
-      }
-    ];
-
-    const selectVille = document.getElementById('select-ville');
-    const activitesBox = document.getElementById('activites-ville');
-    const activitesTitre = document.getElementById('activites-titre');
-    const activitesListe = document.getElementById('activites-liste');
-
-    let markerVille = null;
-
-    // Remplissage du menu déroulant
-    villes.forEach((ville, index) => {
-      const option = document.createElement('option');
-      option.value = index;
-      option.textContent = ville.nom;
-      selectVille.appendChild(option);
-    });
-
-    function afficherVille(ville) {
-      map.setView(ville.coords, ville.zoom);
-
-      if (markerVille) {
-        map.removeLayer(markerVille);
-      }
-      markerVille = L.marker(ville.coords).addTo(map)
-        .bindPopup(ville.nom)
-        .openPopup();
-
-      activitesTitre.textContent = "Activités autour de " + ville.nom;
-      activitesListe.innerHTML = "";
-      ville.activites.forEach(activite => {
-        const li = document.createElement('li');
-        li.textContent = activite;
-        activitesListe.appendChild(li);
-      });
-      activitesBox.hidden = false;
-
-      showAlert('info', ville.nom, "Carte centrée sur " + ville.nom + ".");
-    }
-
-    selectVille.addEventListener('change', (event) => {
-      const index = event.target.value;
-      if (index === "") return;
-      afficherVille(villes[index]);
-    });
-
-    // --- Géolocalisation ---
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0
-      });
-    } else {
-      showAlert('warning', 'Géolocalisation indisponible', "Votre navigateur ne prend pas en charge la géolocalisation.");
-    }
-
-    function successCallback(position) {
-      const { latitude, longitude } = position.coords;
-      map.setView([latitude, longitude], 15);
-      L.marker([latitude, longitude]).addTo(map)
-        .bindPopup('Vous êtes ici')
-        .openPopup();
-      showAlert('success', 'Position trouvée', "Carte centrée sur votre position actuelle.");
-    }
-
-    function errorCallback(error) {
-      const messages = {
-        1: "Vous avez refusé le partage de votre position.",
-        2: "Votre position est indisponible pour le moment.",
-        3: "La demande de position a expiré."
-      };
-      showAlert('warning', 'Géolocalisation refusée ou indisponible', messages[error.code] || error.message);
-    }
-  </script>
-
-      <p class="fr-text--lead">
-        Cette page utilise votre position pour vous montrer les services les plus proches.
-      </p>
-
-      <div id="geoloc-alert" class="fr-alert fr-alert--info fr-alert--geoloc" hidden>
-        <h3 class="fr-alert__title" id="geoloc-alert-title">Localisation</h3>
-        <p id="geoloc-alert-text"></p>
+        <div id="activites-ville" hidden>
+          <h3 id="activites-titre">Activités</h3>
+          <ul id="activites-liste"></ul>
+        </div>
       </div>
 
       <div id="map"></div>
-
-      <p class="fr-hint-text fr-mt-2w">
-        Si vous refusez la géolocalisation, la carte reste centrée sur Paris.
-      </p>
-
     </div>
-  </main>
-  <!-- Leaflet -->
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <!-- DSFR JS (nécessaire pour les composants interactifs comme le menu et les alertes) -->
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.module.min.js"></script>
-  <script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.nomodule.min.js"></script>
 
-  <script>
-    // Position par défaut : Paris
-    const defaultCoords = [48.8566, 2.3522];
-    const map = L.map('map').setView(defaultCoords, 13);
+    <p class="fr-hint-text fr-mt-2w">
+      Si vous refusez la géolocalisation, la carte reste centrée sur Paris.
+    </p>
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      maxZoom: 19
-    }).addTo(map);
-
-    const alertBox = document.getElementById('geoloc-alert');
-    const alertTitle = document.getElementById('geoloc-alert-title');
-    const alertText = document.getElementById('geoloc-alert-text');
-
-    function showAlert(type, title, text) {
-      alertBox.hidden = false;
-      alertBox.classList.remove('fr-alert--info', 'fr-alert--success', 'fr-alert--warning', 'fr-alert--error');
-      alertBox.classList.add('fr-alert--' + type);
-      alertTitle.textContent = title;
-      alertText.textContent = text;
-    }
-
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-        enableHighAccuracy: true,
-        timeout: 10000,
-        maximumAge: 0
-      });
-    } else {
-      showAlert('warning', 'Géolocalisation indisponible', "Votre navigateur ne prend pas en charge la géolocalisation.");
-    }
-
-    function successCallback(position) {
-      const { latitude, longitude } = position.coords;
-      map.setView([latitude, longitude], 15);
-      L.marker([latitude, longitude]).addTo(map)
-        .bindPopup('Vous êtes ici')
-        .openPopup();
-      showAlert('success', 'Position trouvée', "Carte centrée sur votre position actuelle.");
-    }
-
-    function errorCallback(error) {
-      const messages = {
-        1: "Vous avez refusé le partage de votre position.",
-        2: "Votre position est indisponible pour le moment.",
-        3: "La demande de position a expiré."
-      };
-      showAlert('warning', 'Géolocalisation refusée ou indisponible', messages[error.code] || error.message);
-    }
-  </script>
-
-
+  </div>
+</main>
 
 <footer class="fr-footer" role="contentinfo" id="footer">
   <div class="fr-container">
@@ -483,6 +210,192 @@
     </div>
   </div>
 </footer>
+
+<!-- Leaflet -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- DSFR JS (nécessaire pour les composants interactifs comme le menu et les alertes) -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.module.min.js"></script>
+<script type="text/javascript" nomodule src="https://cdn.jsdelivr.net/npm/@gouvfr/dsfr@1.14.4/dist/dsfr.nomodule.min.js"></script>
+
+<script>
+  // Position par défaut : Paris
+  const defaultCoords = [48.8566, 2.3522];
+  const map = L.map('map').setView(defaultCoords, 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 19
+  }).addTo(map);
+
+  const alertBox = document.getElementById('geoloc-alert');
+  const alertTitle = document.getElementById('geoloc-alert-title');
+  const alertText = document.getElementById('geoloc-alert-text');
+
+  function showAlert(type, title, text) {
+    alertBox.hidden = false;
+    alertBox.classList.remove('fr-alert--info', 'fr-alert--success', 'fr-alert--warning', 'fr-alert--error');
+    alertBox.classList.add('fr-alert--' + type);
+    alertTitle.textContent = title;
+    alertText.textContent = text;
+  }
+
+  // --- Villes et activités associées ---
+  const villes = [
+    {
+      nom: "Paris",
+      coords: [48.8566, 2.3522],
+      zoom: 13,
+      activites: [
+        "Atelier « Regarder les offres d'emploi sans postuler »",
+        "Réunion d'information sur la salle d'attente",
+        "Simulation d'entretien avec un miroir"
+      ]
+    },
+    {
+      nom: "Lyon",
+      coords: [45.7640, 4.8357],
+      zoom: 13,
+      activites: [
+        "Café-débat « Pourquoi travailler un lundi ? »",
+        "Atelier CV : la police Comic Sans est-elle un frein ?",
+        "Marche collective jusqu'au guichet fermé"
+      ]
+    },
+    {
+      nom: "Marseille",
+      coords: [43.2965, 5.3698],
+      zoom: 13,
+      activites: [
+        "Séminaire « L'art de la relance téléphonique infinie »",
+        "Pique-nique devant le pôle emploi",
+        "Atelier photocopie de justificatifs (durée illimitée)"
+      ]
+    },
+    {
+      nom: "Toulouse",
+      coords: [43.6047, 1.4442],
+      zoom: 13,
+      activites: [
+        "Conférence « Le formulaire Cerfa, entre mythe et réalité »",
+        "Groupe de parole : accepter le statu quo",
+        "Atelier lecture d'annonces sans postuler"
+      ]
+    },
+    {
+      nom: "Lille",
+      coords: [50.6292, 3.0573],
+      zoom: 13,
+      activites: [
+        "Rencontre « Un jour, peut-être, un entretien »",
+        "Atelier rédaction de lettres jamais envoyées",
+        "Stand café pour faire passer le temps"
+      ]
+    },
+    {
+      nom: "Bordeaux",
+      coords: [44.8378, -0.5792],
+      zoom: 13,
+      activites: [
+        "Visite guidée du bâtiment sans les bureaux ouverts",
+        "Atelier « Patienter avec le sourire »",
+        "Dégustation de café d'attente"
+      ]
+    },
+    {
+      nom: "Nantes",
+      coords: [47.2184, -1.5536],
+      zoom: 13,
+      activites: [
+        "Atelier « Remplir le même dossier deux fois »",
+        "Réunion sur la file d'attente virtuelle",
+        "Groupe de soutien anti-motivation"
+      ]
+    },
+    {
+      nom: "Strasbourg",
+      coords: [48.5734, 7.7521],
+      zoom: 13,
+      activites: [
+        "Conférence transfrontalière sur l'inactivité",
+        "Atelier traduction de formulaires incompréhensibles",
+        "Marche silencieuse jusqu'à l'accueil"
+      ]
+    }
+  ];
+
+  const selectVille = document.getElementById('select-ville');
+  const activitesBox = document.getElementById('activites-ville');
+  const activitesTitre = document.getElementById('activites-titre');
+  const activitesListe = document.getElementById('activites-liste');
+
+  let markerVille = null;
+
+  // Remplissage du menu déroulant
+  villes.forEach((ville, index) => {
+    const option = document.createElement('option');
+    option.value = index;
+    option.textContent = ville.nom;
+    selectVille.appendChild(option);
+  });
+
+  function afficherVille(ville) {
+    map.setView(ville.coords, ville.zoom);
+
+    if (markerVille) {
+      map.removeLayer(markerVille);
+    }
+    markerVille = L.marker(ville.coords).addTo(map)
+      .bindPopup(ville.nom)
+      .openPopup();
+
+    activitesTitre.textContent = "Activités autour de " + ville.nom;
+    activitesListe.innerHTML = "";
+    ville.activites.forEach(activite => {
+      const li = document.createElement('li');
+      li.textContent = activite;
+      activitesListe.appendChild(li);
+    });
+    activitesBox.hidden = false;
+
+    showAlert('info', ville.nom, "Carte centrée sur " + ville.nom + ".");
+  }
+
+  selectVille.addEventListener('change', (event) => {
+    const index = event.target.value;
+    if (index === "") return;
+    afficherVille(villes[index]);
+  });
+
+  // --- Géolocalisation ---
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 0
+    });
+  } else {
+    showAlert('warning', 'Géolocalisation indisponible', "Votre navigateur ne prend pas en charge la géolocalisation.");
+  }
+
+  function successCallback(position) {
+    const { latitude, longitude } = position.coords;
+    map.setView([latitude, longitude], 15);
+    L.marker([latitude, longitude]).addTo(map)
+      .bindPopup('Vous êtes ici')
+      .openPopup();
+    showAlert('success', 'Position trouvée', "Carte centrée sur votre position actuelle.");
+  }
+
+  function errorCallback(error) {
+    const messages = {
+      1: "Vous avez refusé le partage de votre position.",
+      2: "Votre position est indisponible pour le moment.",
+      3: "La demande de position a expiré."
+    };
+    showAlert('warning', 'Géolocalisation refusée ou indisponible', messages[error.code] || error.message);
+  }
+</script>
 
 </body>
 </html>
