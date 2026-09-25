@@ -308,9 +308,21 @@
       </div>
 
       <div class="carousel__controles">
-        <button class="fr-btn fr-btn--secondary fr-icon-arrow-left-s-line" id="carousel-prev" type="button" aria-label="Actualité précédente"></button>
-        <button class="fr-btn fr-btn--secondary fr-icon-arrow-right-s-line" id="carousel-next" type="button" aria-label="Actualité suivante"></button>
+        <button id="carousel-prev" type="button" aria-label="Actualité précédente"><img src="icon logo/bouton gauche .png" alt="" srcset=""></button>
+        <button id="carousel-next" type="button" aria-label="Actualité suivante"><img src="icon logo/bouton droite.png" alt="" srcset=""></button>
       </div>
+      <style>
+        .carousel__controles button {
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 0.5rem;
+        }
+        .carousel__controles button img {
+          width: 2rem;
+          height: 2rem;
+        }
+      </style>
 
       <div class="carousel__dots" id="carousel-dots"></div>
     </div>
