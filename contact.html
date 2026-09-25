@@ -9,6 +9,50 @@
 <link rel="icon" href="files/icon.ico" type="image/x-icon">
 <title>Ministère du Chômage — République Française</title>
 <link rel="stylesheet" href="CSS/style.css">
+
+<style>
+  #accueil ~ main.fr-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 3rem;
+  }
+  .doc-card {
+    border: 1px solid #dddddd;
+    border-left: 4px solid #000091;
+    border-radius: 4px;
+    background-color: #f6f6f6;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  }
+  .doc-card h3 {
+    margin-top: 0;
+    color: #000091;
+  }
+  .doc-card p {
+    margin: 0 0 0.75rem 0;
+  }
+  .doc-card p:last-of-type {
+    margin-bottom: 1.25rem;
+  }
+  .doc-card .fr-btn {
+    margin-top: 0.5rem;
+  }
+
+  .poll-card { margin-bottom: 0; }
+  .poll-card fieldset { border: 0; padding: 0; margin: 0 0 1rem 0; }
+  .poll-card legend { font-weight: 600; margin-bottom: .75rem; }
+  .poll-opt { display: block; margin: .4rem 0; cursor: pointer; }
+  .poll-opt input { margin-right: .5rem; }
+  .poll-res { display: none; margin-top: 1rem; }
+  .poll-row { margin: .6rem 0; font-size: .9rem; }
+  .poll-bar { height: 10px; background: #e5e5e5; border-radius: 5px; overflow: hidden; margin-top: .2rem; }
+  .poll-bar span { display: block; height: 100%; background: #000091; width: 0; transition: width .6s ease; }
+  .poll-total { font-size: .8rem; color: #666; margin-top: .75rem; }
+  .poll-note { font-style: italic; font-size: .85rem; }
+</style>
+
 </head>
 <body>
 
@@ -61,6 +105,16 @@
   </div>
 </header>
 <section class="fr-hero" id="accueil">
+  
+<br>
+  <main class="fr-container">
+
+  <div id="doc1" class="doc-card">
+    <h3>Prendre rendez-vous avec le Ministère</h3>
+      <p>Si vous souhaitez prendre rendez-vous avec le Ministère ou l'une de ses agences partout en France, vous pouvez le faire sur <a href="https://http.cat/"">ce lien clickable</a>.</p>
+  </div>
+</main>
+
     <main>
     <section id="contacts" class="fr-container fr-py-6w">
       <div class="fr-grid-row fr-grid-row--center">
